@@ -1,0 +1,62 @@
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+        <div class="col-md-8">
+            <h1 class="display-3" name="title">{{aboutData.title}}</h1>
+            <p>{{aboutData.description}}</p>
+            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#aboutModal">Contact us&raquo;</button>
+        </div>
+        <div class="col-md-4">
+            <app-notification></app-notification>
+        </div>
+    </div>
+    </div>
+  </div>
+
+  <div id="aboutModal" class="modal fade" role="dialog" style="max-height:700px;overflow-y: scroll;">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Contact us</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="title">Title:</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="title" placeholder="Enter Title" name="modal_title" [(ngModel)]="aboutData.title" readonly>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="description">Description:</label>
+                    <div class="col-sm-10">
+                      <textarea type="textarea" class="form-control" id="description" placeholder="Enter Description" name="modal_desc" [(ngModel)]="aboutData.description" readonly></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="mobile">Mobile:</label>
+                    <div class="col-sm-10">
+                      <input type="number" class="form-control" id="mobile" placeholder="Enter Description" name="modal_mobile" [(ngModel)]="aboutData.contact.phone">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="email">Email:</label>
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="email" placeholder="Enter Email" name="modal_email" [(ngModel)]="aboutData.contact.email" readonly>
+                    </div>
+                  </div>
+                </form>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
+          <button type="submit" (click)="onSubmit()" class="btn btn-outline-success">Submit</button>
+        </div>
+      </div>
+  
+    </div>
+  </div>
