@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+.editPencil{
+    font-size:15px;
+    cursor: pointer;
+}
+.editPencil_small{
+  font-size:12px;
+  cursor: pointer;
+}
+.removeIcon{
+  font-size:15px;
+  cursor: pointer;
+  color:red;
+}
+.removeIcon_small{
+  font-size:12px;
+  cursor: pointer;
+  color:red;
+}
+
+.imgcontainer {
+    text-align: center;
+    margin: -4px 0 0 0;
+    position: relative;
+  }
+  
+  img.avatar {
+    width: 18%;
+    border-radius: 50%;
+  }

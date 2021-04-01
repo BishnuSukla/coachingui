@@ -1,14 +1,43 @@
-<h3 class="display-6"><i class="fa fa-bell-o" aria-hidden="true"></i>&nbsp;What's new</h3>
+<h3 class="display-6"><i class="fa fa-bell-o" aria-hidden="true"></i>&nbsp;What's new&nbsp;<span data-toggle="modal" data-target="#newNotification" (click)="setFlagAndData('add')" *ngIf="userLoggedIn" class="editPencil"><i class="fa fa-pencil" aria-hidden="true"></i></span></h3>
 <div id="noty-holder">
     <ul class="list-group">
-        <li style="margin-bottom: 2px;" class="list-group-item list-group-item-action"><i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;This is a danger list group item</li>
-        <li  style="margin-bottom: 2px;"class="list-group-item list-group-item-action"><i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;This is a danger list group item</li>
-        <li style="margin-bottom: 2px;" class="list-group-item list-group-item-action"><i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;This is a warning list group item</li>
-        <li  class="list-group-item list-group-item-action"><i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;This is a secondary list group item</li>
-                    <!-- <li class="list-group-item list-group-item-primary">This is a primary list group item</li>
-                    <li class="list-group-item list-group-item-secondary">This is a secondary list group item</li>
-                    <li class="list-group-item list-group-item-success">This is a success list group item</li>
-                    <li class="list-group-item list-group-item-danger">This is a danger list group item</li>
-                    <li class="list-group-item list-group-item-warning">This is a warning list group item</li> -->
-        </ul>
+        <li style="margin-bottom: 2px;" *ngFor="let notification of notifications" class="list-group-item list-group-item-action"><i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;{{notification.notification}} &nbsp;<i *ngIf="userLoggedIn" class="fa fa-pencil editPencil_small" data-toggle="modal" data-target="#newNotification" (click)="setFlagAndData('update');setNotificationToBeUpdated(notification.notificationId)" aria-hidden="true"></i>&nbsp;<i *ngIf="userLoggedIn" data-toggle="modal" data-target="#confirmModal" (click)="setFlagAndData('delete');setNotificationToBeUpdated(notification.notificationId)" class="fa fa-times removeIcon_small" aria-hidden="true"></i></li>
+    </ul>
 </div>
+
+<app-confirm [removeItem]="removeText" (removeConfirmationEvent)="addNotification($event)"></app-confirm>
+
+<div id="newNotification" class="modal fade" role="dialog" style="max-height:700px;overflow-y: scroll;">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Add Notifications</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="title">Message:</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="title" placeholder="Enter Message" name="modal_not_message" [(ngModel)]="newNotification.notification">
+                    </div>
+                  </div>
+                  <!-- <div class="form-group">
+                    <label class="control-label col-sm-2" for="description">Description:</label>
+                    <div class="col-sm-10">
+                      <textarea type="textarea" class="form-control" id="description" placeholder="Enter Description" name="modal_desc" [(ngModel)]="aboutData.description"></textarea>
+                    </div>
+                  </div> -->
+                </form>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
+          <button type="submit" (click)="addNotification(undefined)" class="btn btn-outline-success">Submit</button>
+        </div>
+      </div>
+  
+    </div>
+  </div>

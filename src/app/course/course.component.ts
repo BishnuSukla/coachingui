@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SubjectService } from '../subject.service';
 import { Course } from './course.model';
-
 @Component({
   selector: 'app-course',
   templateUrl: './course.component.html',
@@ -8,7 +8,8 @@ import { Course } from './course.model';
 })
 export class CourseComponent implements OnInit {
   courses:Course[];
-  constructor() {
+  userLoggedIn:boolean;
+  constructor(private _subjectService:SubjectService) {
     this.courses = [
       {
         name:'Maths',
@@ -102,6 +103,9 @@ export class CourseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._subjectService.source.subscribe((val)=>{
+      this.userLoggedIn = val;
+    })
   }
 
 }

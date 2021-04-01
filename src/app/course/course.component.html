@@ -2,7 +2,7 @@
     <!-- Example row of columns -->
     <div class="row" >
       <div class="col-md-4" *ngFor="let course of courses;">
-        <h2>{{course.name}}</h2>
+        <h2>{{course.name}}&nbsp;<span *ngIf="userLoggedIn" class="editPencil"><i class="fa fa-pencil" aria-hidden="true"></i></span></h2>
         <p>{{course.topicCovered}}</p>
         <p *ngIf="course.typeOfTution[0].available"><small style="font-style: italic;color:#721c24;"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Home tution available</small></p>
         <p>
