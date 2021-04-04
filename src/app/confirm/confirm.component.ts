@@ -11,6 +11,7 @@ export class ConfirmComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(22);
   }
 
   sendConfirmation(value: string) {

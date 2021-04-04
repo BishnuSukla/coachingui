@@ -15,9 +15,11 @@ export class CourseComponent implements OnInit {
   userLoggedIn:boolean;
   newCourse:any;
   operation:string;
-  removeText='course';
+  removeText='';
+  filterArgs:string;
   constructor(private _apiService:ApiService, private _subjectService:SubjectService, private toastr: ToastrService) {
-   this.newCourse ={
+    this.filterArgs = '';
+    this.newCourse ={
     name:'',
     topicCovered:'',
     typeOfTution:[
@@ -39,96 +41,6 @@ export class CourseComponent implements OnInit {
     ],
     class:""
    };
-  //   this.courses = [
-  //     {
-  //       name:'Maths',
-  //       topicCovered:"On this course will cover probabilty, permutation and combination etc etc etc etc etec On this course will cover probabilty, permutation and combination etc etc etc etc etec On this course will cover probabilty, permutation and combination ",
-  //       typeOfTution:[
-  //         {
-  //           type:'Home',
-  //           fee:"500rs",
-  //           available:true
-  //         },
-  //         {
-  //           type:'Group',
-  //           fee:"200rs",
-  //           available:true
-  //         }
-  //       ],
-  //       faculty:[
-  //         {
-  //           name:"Plabita Das"
-  //         }
-  //       ],
-  //       class:['V',"IX"]
-  //   },
-  //   {
-  //     name:'Science',
-  //     topicCovered:"On this course will cover probabilty, permutation and combination etc etc etc etc etec ",
-  //     typeOfTution:[
-  //       {
-  //         type:'Home',
-  //         fee:"500rs",
-  //         available:false
-  //       },
-  //       {
-  //         type:'Group',
-  //         fee:"200rs",
-  //         available:true
-  //       }
-  //     ],
-  //     faculty:[
-  //       {
-  //         name:"Plabita Das"
-  //       }
-  //     ],
-  //     class:['V',"IX"]
-  // },
-  // {
-  //   name:'History',
-  //   topicCovered:"On this course will cover probabilty, permutation and combination etc etc etc etc etec ",
-  //   typeOfTution:[
-  //     {
-  //       type:'Home',
-  //       fee:"500rs",
-  //       available:true
-  //     },
-  //     {
-  //       type:'Group',
-  //       fee:"200rs",
-  //       available:false
-  //     }
-  //   ],
-  //   faculty:[
-  //     {
-  //       name:"Plabita Das"
-  //     }
-  //   ],
-  //   class:['V',"IX"]
-  //   },
-  //   {
-  //     name:'Sociology',
-  //     topicCovered:"On this course will cover probabilty, permutation and combination etc etc etc etc etec ",
-  //     typeOfTution:[
-  //       {
-  //         type:'Home',
-  //         fee:"500rs",
-  //         available:true
-  //       },
-  //       {
-  //         type:'Group',
-  //         fee:"200rs",
-  //         available:false
-  //       }
-  //     ],
-  //     faculty:[
-  //       {
-  //         name:"Plabita Das"
-  //       }
-  //     ],
-  //     class:['V',"IX"]
-  //     },
-  // ]
   }
 
   ngOnInit(): void {
@@ -151,6 +63,29 @@ export class CourseComponent implements OnInit {
 
   setFlagAndData(val){
     this.operation = val;
+    this.removeText='course';
+    this.newCourse ={
+      name:'',
+      topicCovered:'',
+      typeOfTution:[
+        {
+          type:'Home',
+          fee:0,
+          available:false
+        },
+        {
+          type:'Group',
+          fee:0,
+          available:false
+        }            
+      ],
+      faculty:[
+        {
+          name:""
+        }
+      ],
+      class:""
+     };
   }
 
   onSave(data){

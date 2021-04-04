@@ -15,7 +15,7 @@ export class NotificationComponent implements OnInit {
   notifications:Notification[];
   newNotification:any;
   flag:string;
-  removeText='notification';
+  removeText='';
   constructor(private _apiService:ApiService,private _subjectService:SubjectService,private toastr: ToastrService) { 
     this.newNotification = {
       notification:''
@@ -40,6 +40,10 @@ export class NotificationComponent implements OnInit {
 
   setFlagAndData(val){
     this.flag = val;
+    this.removeText='notification';
+    this.newNotification = {
+      notification:''
+    }
   }
   setNotificationToBeUpdated(notificationId){
     this.newNotification = _.cloneDeep(_.find(this.notifications,{notificationId:notificationId}));
@@ -90,7 +94,7 @@ export class NotificationComponent implements OnInit {
           this._subjectService.clearToken(response);
       })
     }
-    $('#newNotification').modal('hide');  
+    $('#newNotification').modal('hide');
   }
 
 

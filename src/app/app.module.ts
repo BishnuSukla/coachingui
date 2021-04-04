@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ConfirmComponent } from './confirm/confirm.component';
+import { FilterPipe } from './course/filter.pipe';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'faculty', component: FacultyComponent }
@@ -32,7 +33,8 @@ const routes: Routes = [
     FacultyComponent,
     HomeComponent,
     LoginComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    FilterPipe,
   ],
   imports: [
     RouterModule.forRoot(routes),

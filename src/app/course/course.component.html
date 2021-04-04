@@ -1,8 +1,15 @@
+<div class="container" style="text-align: left;">
+  <form class="form-inline my-2 my-lg-0">
+    <h3>Courses <span class="editPencil" data-toggle="modal" data-target="#addCourses" (click)="setFlagAndData('Add')" *ngIf="userLoggedIn"><i class="fa fa-plus"></i></span></h3>
+    &nbsp;&nbsp;
+    <input class="form-control mr-sm-2" type="text" placeholder="Filter courses" [ngModelOptions]="{standalone: true}" [(ngModel)]="filterArgs" aria-label="Search">
+  </form>
+</div>
+<hr/>
 <div class="container">
-  <h1>Courses <span  data-toggle="modal" data-target="#addCourses" (click)="setFlagAndData('Add')" *ngIf="userLoggedIn"><i class="fa fa-plus"></i></span></h1>
     <!-- Example row of columns -->
     <div class="row" >
-      <div class="col-md-4" *ngFor="let course of courses;">
+      <div class="col-md-4" *ngFor="let course of courses | filter:filterArgs">
         <h2>{{course.name}}&nbsp;<span *ngIf="userLoggedIn" class="editPencil">
           <i *ngIf="userLoggedIn" class="fa fa-pencil editPencil_small" data-toggle="modal" data-target="#addCourses" (click)="setFlagAndData('Update');setCourseToBeUpdated(course.courseId)" aria-hidden="true"></i>&nbsp;
           <i *ngIf="userLoggedIn" data-toggle="modal" data-target="#confirmModal" (click)="setFlagAndData('Delete');setCourseToBeUpdated(course.courseId)" class="fa fa-times removeIcon_small" aria-hidden="true"></i>
@@ -19,7 +26,7 @@
     <hr>
 
 </div>
-<app-confirm [removeItem]="removeText" (removeConfirmationEvent)="onSave($event)"></app-confirm>
+<app-confirm *ngIf="removeText=='course'" [removeItem]="removeText" (removeConfirmationEvent)="onSave($event)"></app-confirm>
 <div id="addCourses" class="modal fade" role="dialog" style="max-height:700px;overflow-y: scroll;">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -31,13 +38,13 @@
             <form class="form-horizontal">
               <div class="form-group">
                 <label class="control-label col-sm-2" for="courseName">Name:</label>
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                   <input type="text" class="form-control" id="courseName" placeholder="Enter Course Name" name="modal_courseName" [(ngModel)]="newCourse.name">
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-2" for="description">Description:</label>
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                   <textarea type="textarea" class="form-control" id="description" placeholder="Enter Description" name="modal_desc" [(ngModel)]="newCourse.topicCovered"></textarea>
                 </div>
               </div>
@@ -45,24 +52,24 @@
               <div class="form-group" *ngFor="let tution of newCourse.typeOfTution">
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="{{tution.type}}">{{tution.type}} Tuition</label>
-                  <input type="checkbox" id="{{tution.type}}" [(ngModel)]="tution.available"[ngModelOptions]="{standalone: true}">
+                  <input type="checkbox" id="{{tution.type}}" [(ngModel)]="tution.available" [ngModelOptions]="{standalone: true}">
                 </div>
                 <div class="form-group">
                   <label class="control-label col-sm-2" >Fees:</label>
-                  <div class="col-sm-10">
+                  <div class="col-sm-12">
                     <input type="number" class="form-control" id="fees" placeholder="Enter Fees" name="modal_fees" [(ngModel)]="tution.fee">
                   </div>
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-2" for="description">Category:</label>
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                   <input type="text" class="form-control" id="description" placeholder="e.g. Academic, Technical, Competitive," name="modal_catagory" [(ngModel)]="newCourse.category">
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-2">Class:</label>
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                   <input type="text" class="form-control" id="description" placeholder="e.g. IV, V" name="modal_catagory" [(ngModel)]="newCourse.class">
                 </div>
               </div>
