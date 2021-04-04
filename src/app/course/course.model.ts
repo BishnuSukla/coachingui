@@ -5,7 +5,8 @@ export interface Course{
     topicCovered:string,
     typeOfTution:Tution[]
     faculty:Faculty[]
-    class:string[]
+    class:string
+    category:string[]
 }
 
 class Tution{

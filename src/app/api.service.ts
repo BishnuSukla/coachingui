@@ -46,4 +46,24 @@ export class ApiService {
     }
     return this.http.request('delete',url+"/api/delete-notification",options); 
   }
+  createCourse(course){
+    let headers = new HttpHeaders().set("token", localStorage.getItem('token')).set("Content-Type", "application/json");;
+    return this.http.put(url+"/api/create-course",{course},{headers}); 
+  }
+  getCourse(){
+    return this.http.get(url+"/api/get-courses");
+  }
+  updateCourse(course){
+    let headers = new HttpHeaders().set("token", localStorage.getItem('token')).set("Content-Type", "application/json");;
+    return this.http.patch(url+"/api/update-course",{course},{headers}); 
+  }
+  deleteCourse(courseId){
+    const options = {
+      headers:new HttpHeaders().set("token", localStorage.getItem('token')).set("Content-Type", "application/json"),
+      body:{courseId}
+    }
+    return this.http.request('delete',url+"/api/delete-course",options); 
+  }
 }
+
+
