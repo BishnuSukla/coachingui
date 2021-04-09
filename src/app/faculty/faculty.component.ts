@@ -30,7 +30,8 @@ export class FacultyComponent implements OnInit {
       experience:0,
       mobile:0,
       email:'',
-      class:''
+      class:'',
+      subjects:''
     }
    }
 
@@ -65,7 +66,8 @@ export class FacultyComponent implements OnInit {
     experience:0,
     mobile:0,
     email:'',
-    class:''
+    class:'',
+    subjects:''
   }
    }
 

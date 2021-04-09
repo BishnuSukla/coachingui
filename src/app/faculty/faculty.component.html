@@ -16,8 +16,7 @@
         </span></h2>
         <p>{{faculty.experience}}</p>
         <p>
-            <a class="btn btn-secondary" href="#" role="button">View details &raquo;</a>&nbsp;
-            <a class="btn btn-outline-success" href="#" role="button">Register</a>
+            <a class="btn btn-secondary" href="#" role="button">View details &raquo;</a>
         </p>
       </div>
     </div>
@@ -36,15 +35,15 @@
       <div class="modal-body container">
             <form class="form-horizontal">
               <div class="form-group">
-                <label class="control-label col-sm-2" for="courseName">Name:</label>
+                <label class="control-label col-sm-2" for="facultyName">Name:</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="courseName" placeholder="Enter Faculty Name" name="modal_courseName" [(ngModel)]="newFaculty.name">
+                  <input type="text" class="form-control" id="facultyName" placeholder="Enter Faculty Name" name="modal_facultyName" [(ngModel)]="newFaculty.name">
                 </div>
               </div>
               <div class="form-group">
-                <label class="control-label col-sm-2" for="description">Experience:</label>
+                <label class="control-label col-sm-2" for="experience">Experience:</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="fees" placeholder="Enter Fees" name="modal_fees" [(ngModel)]="newFaculty.experience">
+                  <input type="number" class="form-control" id="experience" placeholder="Enter experience" name="modal_experience" [(ngModel)]="newFaculty.experience">
                 </div>
               </div>
               
@@ -54,44 +53,44 @@
                   <input type="checkbox" id="{{tution.type}}"  >
                 </div> -->
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="name">Qualification:</label>
+                    <label class="control-label col-sm-2" for="qualification">Qualification:</label>
                     <div class="col-sm-12">
-                    <input type="text" class="form-control" id="name" placeholder="Enter Qualification" name="modal_fees" [(ngModel)]="newFaculty.degree.name">
+                    <input type="text" class="form-control" id="qualification" placeholder="Enter Qualification" name="modal_qualification" [(ngModel)]="newFaculty.degree.name">
                   </div>
-                  <label class="control-label col-sm-2" for="college">Institute:</label>
+                  <label class="control-label col-sm-2" for="institute">Institute:</label>
                   <div class="col-sm-12">
-                  <input type="text" class="form-control" id="college" placeholder="Enter Institute" name="modal_fees" [(ngModel)]="newFaculty.degree.college">
+                  <input type="text" class="form-control" id="institute" placeholder="Enter Institute" name="modal_institute" [(ngModel)]="newFaculty.degree.college">
                 </div>
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-2" for="address">Address:</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="address" placeholder="Enter Address" name="modal_catagory" [(ngModel)]="newFaculty.address">
+                  <input type="text" class="form-control" id="address" placeholder="Enter Address" name="modal_address" [(ngModel)]="newFaculty.address">
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-2" for="mobile">Mobile:</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="mobile" placeholder="Enter Mobile" name="modal_catagory" [(ngModel)]="newFaculty.mobile">
+                  <input type="number" class="form-control" id="mobile" placeholder="Enter Mobile" name="modal_mobile" [(ngModel)]="newFaculty.mobile">
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Email:</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="email" placeholder="Enter Email id" name="modal_catagory" [(ngModel)]="newFaculty.email">
+                  <input type="text" class="form-control" id="email" placeholder="Enter Email id" name="modal_email" [(ngModel)]="newFaculty.email">
                 </div>
               </div>
               <div class="form-group">
-                <label class="control-label col-sm-2" for="Class">Class:</label>
+                <label class="control-label col-sm-2" for="class">Class:</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="Class" placeholder="e.g. IV, V" name="modal_catagory" [(ngModel)]="newFaculty.class">
+                  <input type="text" class="form-control" id="class" placeholder="e.g. IV, V" name="modal_class" [(ngModel)]="newFaculty.class">
                 </div>
               </div>
               <div class="form-group">
-                <label class="control-label col-sm-2" for="Class">Subject:</label>
+                <label class="control-label col-sm-2" for="subject">Subject:</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="Class" placeholder="e.g. Science, Maths" name="modal_catagory" [(ngModel)]="newFaculty.subject">
+                  <input type="text" class="form-control" id="subject" placeholder="e.g. Science, Maths" name="modal_subject" [(ngModel)]="newFaculty.subjects">
                 </div>
               </div>
               <!-- <div class="form-group">

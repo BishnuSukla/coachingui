@@ -8,5 +8,6 @@ export interface Faculty{
     experience:Number,
     mobile:Number,
     email:string,
-    class:string
+    class:string,
+    subjects:string
 }
