@@ -72,6 +72,24 @@ export class ApiService {
     let headers = new HttpHeaders().set("token", localStorage.getItem('token')).set("Content-Type", "application/json");;
     return this.http.get(url+"/api/get-registrations",{headers}); 
   }
+  createFaculty(faculty){
+    let headers = new HttpHeaders().set("token", localStorage.getItem('token')).set("Content-Type", "application/json");;
+    return this.http.put(url+"/api/create-faculty",{faculty},{headers}); 
+  }
+  getFaculty(){
+    return this.http.get(url+"/api/get-faculties");
+  }
+  updateFaculty(faculty){
+    let headers = new HttpHeaders().set("token", localStorage.getItem('token')).set("Content-Type", "application/json");;
+    return this.http.patch(url+"/api/update-faculty",{faculty},{headers}); 
+  }
+  deleteFaculty(facultyId){
+    const options = {
+      headers:new HttpHeaders().set("token", localStorage.getItem('token')).set("Content-Type", "application/json"),
+      body:{facultyId}
+    }
+    return this.http.request('delete',url+"/api/delete-faculty",options); 
+  }
 }
 
 
