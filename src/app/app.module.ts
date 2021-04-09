@@ -17,9 +17,11 @@ import { LoginComponent } from './login/login.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { FilterPipe } from './course/filter.pipe';
+import { RegistrationsComponent } from './registrations/registrations.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'faculty', component: FacultyComponent }
+  { path: 'faculty', component: FacultyComponent },
+  { path: 'registrations', component: RegistrationsComponent }
 ];
 
 @NgModule({
@@ -35,6 +37,7 @@ const routes: Routes = [
     LoginComponent,
     ConfirmComponent,
     FilterPipe,
+    RegistrationsComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),

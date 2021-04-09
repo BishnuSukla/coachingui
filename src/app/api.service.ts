@@ -64,6 +64,14 @@ export class ApiService {
     }
     return this.http.request('delete',url+"/api/delete-course",options); 
   }
+  studentRegister(register){
+    //let headers = new HttpHeaders().set("token", localStorage.getItem('token')).set("Content-Type", "application/json");;
+    return this.http.post(url+"/api/registration",{register}); 
+  }
+  getstudentRegister(){
+    let headers = new HttpHeaders().set("token", localStorage.getItem('token')).set("Content-Type", "application/json");;
+    return this.http.get(url+"/api/get-registrations",{headers}); 
+  }
 }
 
 

@@ -17,6 +17,8 @@ export class CourseComponent implements OnInit {
   operation:string;
   removeText='';
   filterArgs:string;
+  isViewMode: any = false;
+  newStudentInfo: any;
   constructor(private _apiService:ApiService, private _subjectService:SubjectService, private toastr: ToastrService) {
     this.filterArgs = '';
     this.newCourse ={
@@ -41,6 +43,14 @@ export class CourseComponent implements OnInit {
     ],
     class:""
    };
+   this.newStudentInfo ={
+     name:"",
+     emailId:"",
+     mobileNo:"",
+     subject:"math",
+     tuitionType:"",
+     class:""
+   }
   }
 
   ngOnInit(): void {
@@ -63,7 +73,10 @@ export class CourseComponent implements OnInit {
 
   setFlagAndData(val){
     this.operation = val;
-    this.removeText='course';
+    this.isViewMode = false;
+    if(this.operation == 'View Details'){
+      this.isViewMode = true;;
+    }
     this.newCourse ={
       name:'',
       topicCovered:'',
@@ -132,6 +145,7 @@ export class CourseComponent implements OnInit {
           this.toastr.error('Delete failed', 'Failed');
           this._subjectService.clearToken(response);
       })
+      this.removeText='course';
     }
     $('#addCourses').modal('hide');
     // }else{
@@ -144,6 +158,15 @@ export class CourseComponent implements OnInit {
     //       this._subjectService.clearToken(response);
     //   })
     // }
+  }
+  onRegister(){
+    this._apiService.studentRegister(this.newStudentInfo).subscribe((val)=>{
+      this.toastr.success('Registed successfully', 'Success');
+    },response=>{
+        this.toastr.error('Submit failed', 'Failed');
+        this._subjectService.clearToken(response);
+    })
+    $('#viewDetails').modal('hide');
   }
 
 }

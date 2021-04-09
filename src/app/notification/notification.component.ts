@@ -40,7 +40,11 @@ export class NotificationComponent implements OnInit {
 
   setFlagAndData(val){
     this.flag = val;
-    this.removeText='notification';
+    if(this.flag == 'delete'){
+      this.removeText='notification';
+    }else{
+      this.removeText = '';
+    }
     this.newNotification = {
       notification:''
     }
@@ -93,6 +97,7 @@ export class NotificationComponent implements OnInit {
           this.toastr.error('Delete failed', 'Failed');
           this._subjectService.clearToken(response);
       })
+      this.removeText = '';
     }
     $('#newNotification').modal('hide');
   }

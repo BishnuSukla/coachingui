@@ -17,8 +17,8 @@
         <p>{{course.topicCovered}}</p>
         <p *ngIf="course.typeOfTution && course.typeOfTution[0] && course.typeOfTution[0].available"><small style="font-style: italic;color:#721c24;"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Home tution available</small></p>
         <p>
-            <a class="btn btn-secondary" href="#" role="button">View details &raquo;</a>&nbsp;
-            <a class="btn btn-outline-success" href="#" role="button">Register</a>
+            <a data-toggle="modal" data-target="#viewDetails" class="btn btn-secondary" role="button" (click)="setFlagAndData('View details');setCourseToBeUpdated(course.courseId)">View details &raquo;</a>&nbsp;
+            <a class="btn btn-outline-success" href="#" role="button" data-toggle="modal" data-target="#viewDetails"(click)="setFlagAndData('Enter Student Details')">Register</a>
         </p>
       </div>
     </div>
@@ -36,50 +36,48 @@
       </div>
       <div class="modal-body container">
             <form class="form-horizontal">
-              <div class="form-group">
-                <label class="control-label col-sm-2" for="courseName">Name:</label>
-                <div class="col-sm-12">
-                  <input type="text" class="form-control" id="courseName" placeholder="Enter Course Name" name="modal_courseName" [(ngModel)]="newCourse.name">
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Name </span>
                 </div>
+                <input type="text" class="form-control" id="courseName" placeholder="Enter Course Name" name="modal_courseName" [(ngModel)]="newCourse.name">
               </div>
-              <div class="form-group">
-                <label class="control-label col-sm-2" for="description">Description:</label>
-                <div class="col-sm-12">
-                  <textarea type="textarea" class="form-control" id="description" placeholder="Enter Description" name="modal_desc" [(ngModel)]="newCourse.topicCovered"></textarea>
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" for="description">Description </span>
                 </div>
+                <textarea type="textarea" class="form-control" id="description" placeholder="Enter Description" name="modal_desc" [(ngModel)]="newCourse.topicCovered"></textarea>
               </div>
-              
-              <div class="form-group" *ngFor="let tution of newCourse.typeOfTution">
+              <div class="form-group input-group" *ngFor="let tution of newCourse.typeOfTution">
                 <div class="form-group">
-                  <label class="control-label col-sm-2" for="{{tution.type}}">{{tution.type}} Tuition</label>
+                  <label class="" for="{{tution.type}}">{{tution.type}} Tuition</label>
                   <input type="checkbox" id="{{tution.type}}" [(ngModel)]="tution.available" [ngModelOptions]="{standalone: true}">
                 </div>
-                <div class="form-group">
-                  <label class="control-label col-sm-2" >Fees:</label>
-                  <div class="col-sm-12">
-                    <input type="number" class="form-control" id="fees" placeholder="Enter Fees" name="modal_fees" [(ngModel)]="tution.fee">
+                <!-- <div class="form-group input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text"  for="{{tution.type}}">{{tution.type}} Tuition</span>
                   </div>
+                  <input type="checkbox" id="{{tution.type}}" [(ngModel)]="tution.available" [ngModelOptions]="{standalone: true}">
+                </div> -->
+                <div class="form-group input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">Fees</span>
+                  </div>
+                  <input type="number" class="form-control" id="fees" placeholder="Enter Fees" name="modal_fees" [(ngModel)]="tution.fee" [ngModelOptions]="{standalone: true}">
                 </div>
               </div>
-              <div class="form-group">
-                <label class="control-label col-sm-2" for="description">Category:</label>
-                <div class="col-sm-12">
-                  <input type="text" class="form-control" id="description" placeholder="e.g. Academic, Technical, Competitive," name="modal_catagory" [(ngModel)]="newCourse.category">
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" for="category">Category </span>
                 </div>
+                <input type="text" class="form-control" id="category" placeholder="e.g. Academic, Technical, Competitive," name="modal_catagory" [(ngModel)]="newCourse.category">
               </div>
-              <div class="form-group">
-                <label class="control-label col-sm-2">Class:</label>
-                <div class="col-sm-12">
-                  <input type="text" class="form-control" id="description" placeholder="e.g. IV, V" name="modal_catagory" [(ngModel)]="newCourse.class">
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Class </span>
                 </div>
+                <input type="text" class="form-control" id="class" placeholder="e.g. IV, V" name="modal_catagory" [(ngModel)]="newCourse.class">
               </div>
-              <!-- <div class="form-group">
-                <p>Home Tution Available:</p>
-                <input type="radio" id="yes" name="turion" value="yes" (click)="homeTutionAvalability('yes')">
-                <label for="yes">yes</label><br>
-                <input type="radio" id="no" name="turion" value="no" (click)="homeTutionAvalability('no')">
-                <label for="no">no</label><br>  
-              </div> -->
             </form>
     </div>
     <div class="modal-footer">
@@ -87,6 +85,94 @@
       <button type="submit" class="btn btn-outline-success" (click)="onSave(undefined)">Save</button>
     </div>
 
+  </div>
+</div>
+</div>
+<div id="viewDetails" class="modal fade" role="dialog" style="max-height:700px;overflow-y: scroll;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h4 class="modal-title">{{operation}}</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body container">
+            <form class="form-horizontal">
+              <div *ngIf = "operation == 'View details'">
+                <div class="form-group input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">Name </span>
+                  </div>
+                      <label name="modal_name"class="form-control">{{newCourse.name}}</label>
+                </div>
+                <div class="form-group input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">Description </span>
+                  </div>
+                      <textarea name="modal_name"class="form-control">{{newCourse.topicCovered}}</textarea>
+                </div>
+                <div class="form-group input-group" *ngFor="let tution of newCourse.typeOfTution">
+                  <div class="input-group-prepend" *ngIf ="tution.available">
+                      <label class="input-group-text">{{tution.type}} Tuition</label>
+                  </div>
+                      <label *ngIf ="tution.fee" name="modal_name"class="form-control">Rs {{tution.fee}}</label>
+                </div>
+                <div class="form-group input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">Category </span>
+                  </div>
+                      <label name="modal_name"class="form-control">{{newCourse.category}}</label>
+                </div>
+                <div class="form-group input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">Class </span>
+                  </div>
+                      <label name="modal_name"class="form-control">{{newCourse.class}}</label>
+                </div>
+             </div>
+             <div *ngIf = "operation == 'Enter Student Details'">
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Name </span>
+                 </div>
+                    <input name="modal_name"class="form-control" id="studentName" placeholder="Enter Full name" type="text" [(ngModel)]="newStudentInfo.name">
+                </div>
+                <div class="form-group input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Email Id </span>
+                 </div>
+                    <input name="modal_emailId" class="form-control" placeholder="Enter Email address" type="email" [(ngModel)]="newStudentInfo.emailId">
+                </div>
+                <div class="form-group input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Mobile No </span>
+                </div>
+                <!-- <textarea  name="modal_mobileNo" class="form-control" placeholder="Enter Mobile No"></textarea> -->
+                <input name="modal_mobileNo" class="form-control" placeholder="Enter Mobile No" type="number" [(ngModel)]="newStudentInfo.mobileNo">
+                </div>
+                <div class="form-group input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Class </span>
+                </div>
+                <input name="modal_class" class="form-control" placeholder="Enter class" [(ngModel)]="newStudentInfo.class">
+              </div>
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Tuition Type</span>
+              </div>
+              <select name="modal_tuitionType" class="form-control" [(ngModel)]="newStudentInfo.tuitionType">
+                <option value="" disabled selected hidden>Select</option>
+                <option selected="">Home Tuition</option>
+                <option>Group Tuition</option>
+              </select>
+            </div>
+             </div>
+            </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
+      <button *ngIf = "operation == 'Enter Student Details'" type="submit" class="btn btn-outline-success" (click) = "onRegister()">Submit</button>
+      <button *ngIf = "operation == 'View details'" type="submit" class="btn btn-outline-success" (click) = "setFlagAndData('Enter Student Details')">Register</button>
+    </div>
   </div>
 </div>
 
