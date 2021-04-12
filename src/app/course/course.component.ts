@@ -47,7 +47,7 @@ export class CourseComponent implements OnInit {
      name:"",
      emailId:"",
      mobileNo:"",
-     subject:"math",
+     subject:"",
      tuitionType:"",
      class:""
    }
@@ -69,6 +69,9 @@ export class CourseComponent implements OnInit {
 
   setCourseToBeUpdated(courseId){
     this.newCourse= _.cloneDeep(_.find(this.courses,{courseId:courseId}));
+  }
+  onRegisterClick(name){
+    this.newStudentInfo.subject = name;
   }
 
   setFlagAndData(val){

@@ -65,12 +65,22 @@ export class ApiService {
     return this.http.request('delete',url+"/api/delete-course",options); 
   }
   studentRegister(register){
-    //let headers = new HttpHeaders().set("token", localStorage.getItem('token')).set("Content-Type", "application/json");;
     return this.http.post(url+"/api/registration",{register}); 
   }
-  getstudentRegister(){
+  getStudentRegister(){
     let headers = new HttpHeaders().set("token", localStorage.getItem('token')).set("Content-Type", "application/json");;
     return this.http.get(url+"/api/get-registrations",{headers}); 
+  }
+  // deleteStudent(studentId){
+  //   const options = {
+  //   headers:new HttpHeaders().set("token", localStorage.getItem('token')).set("Content-Type", "application/json"),
+  //   body:{studentId}
+  // }
+  //   return this.http.request(url+"/api/delete-registration",options); 
+  // }
+  updateStudent(student){
+    let headers = new HttpHeaders().set("token", localStorage.getItem('token')).set("Content-Type", "application/json");;
+    return this.http.patch(url+"/api/update-registration",{student},{headers}); 
   }
   createFaculty(faculty){
     let headers = new HttpHeaders().set("token", localStorage.getItem('token')).set("Content-Type", "application/json");;

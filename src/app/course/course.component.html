@@ -18,7 +18,7 @@
         <p *ngIf="course.typeOfTution && course.typeOfTution[0] && course.typeOfTution[0].available"><small style="font-style: italic;color:#721c24;"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Home tution available</small></p>
         <p>
             <a data-toggle="modal" data-target="#viewDetails" class="btn btn-secondary" role="button" (click)="setFlagAndData('View details');setCourseToBeUpdated(course.courseId)">View details &raquo;</a>&nbsp;
-            <a class="btn btn-outline-success" href="#" role="button" data-toggle="modal" data-target="#viewDetails"(click)="setFlagAndData('Enter Student Details')">Register</a>
+            <a class="btn btn-outline-success" href="#" role="button" data-toggle="modal" data-target="#viewDetails"(click)="setFlagAndData('Enter Student Details');onRegisterClick(course.name)">Register</a>
         </p>
       </div>
     </div>
@@ -108,7 +108,7 @@
                   <div class="input-group-prepend">
                       <span class="input-group-text">Description </span>
                   </div>
-                      <textarea name="modal_name"class="form-control">{{newCourse.topicCovered}}</textarea>
+                      <textarea [disabled] ='true' name="modal_name"class="form-control">{{newCourse.topicCovered}}</textarea>
                 </div>
                 <div class="form-group input-group" *ngFor="let tution of newCourse.typeOfTution">
                   <div class="input-group-prepend" *ngIf ="tution.available">
@@ -171,7 +171,7 @@
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
       <button *ngIf = "operation == 'Enter Student Details'" type="submit" class="btn btn-outline-success" (click) = "onRegister()">Submit</button>
-      <button *ngIf = "operation == 'View details'" type="submit" class="btn btn-outline-success" (click) = "setFlagAndData('Enter Student Details')">Register</button>
+      <button *ngIf = "operation == 'View details'" type="submit" class="btn btn-outline-success" (click) = "setFlagAndData('Enter Student Details');onRegisterClick(newCourse.name)">Register</button>
     </div>
   </div>
 </div>
