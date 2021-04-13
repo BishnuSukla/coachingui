@@ -1,6 +1,6 @@
-<div class="container" style="text-align: left;">
+<div class="container page_header_margin" style="text-align: left;">
     <form class="form-inline my-2 my-lg-0">
-      <h3 *ngIf="userLoggedIn">Registered Students <span class="editPencil" data-toggle="modal" data-target="#editStudent" ></span></h3>
+      <h3 *ngIf="userLoggedIn"><span class="editPencil" data-toggle="modal" data-target="#editStudent" ></span></h3>
       &nbsp;&nbsp;
       <input class="form-control mr-sm-2" type="text" placeholder="Filter Students" [ngModelOptions]="{standalone: true}" [(ngModel)]="filterArgs1" aria-label="Search">
     </form>
@@ -22,7 +22,7 @@
       </div>
       <hr>
   </div>
-<app-confirm *ngIf="removeText=='student'" [removeItem]="removeText" (removeConfirmationEvent)="onSave($event)"></app-confirm>
+<app-confirm *ngIf="removeText=='registration'" [removeItem]="removeText" (removeConfirmationEvent)="onSave($event)"></app-confirm>
 <div id="editStudent" class="modal fade" role="dialog" style="max-height:700px;overflow-y: scroll;">
   <div class="modal-dialog">
     <div class="modal-content">

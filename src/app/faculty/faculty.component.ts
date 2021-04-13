@@ -54,21 +54,21 @@ export class FacultyComponent implements OnInit {
   }
 
   setFlagAndData(val){
-     this.operation = val;
-     this.removeText='faculty';
-  this.newFaculty = {
-    name:'',
-    degree:{
+    this.operation = val;
+    this.removeText='faculty';
+    this.newFaculty = {
         name:'',
-        college:''
-    },
-    address:'',
-    experience:0,
-    mobile:0,
-    email:'',
-    class:'',
-    subjects:''
-  }
+        degree:{
+            name:'',
+            college:''
+        },
+        address:'',
+        experience:0,
+        mobile:0,
+        email:'',
+        class:'',
+        subjects:''
+    }
    }
 
    onSave(data){

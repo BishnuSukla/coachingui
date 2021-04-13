@@ -47,11 +47,11 @@ export class RegistrationsComponent implements OnInit {
 
   setFlagAndData(val){
      this.operation = val;
-     this.removeText ="student";
+     this.removeText ="registration";
    }
   onSave(data){
      if(this.operation=='Update'){
-      this._apiService.updateStudent(this.selectedStudent).subscribe((val)=>{
+      this._apiService.updateRegisteredStudent(this.selectedStudent).subscribe((val)=>{
         this._apiService.getStudentRegister().subscribe((val)=>{
           if(val['data']){
             this.registeredStudentList = val['data'];
@@ -59,26 +59,26 @@ export class RegistrationsComponent implements OnInit {
         },response=>{
           console.log(response);
         })
-        this.toastr.success('Faculty updated successfully', 'Success');
+        this.toastr.success('Registrations updated successfully', 'Success');
       },response=>{
           this.toastr.error('Submit failed', 'Failed');
           this._subjectService.clearToken(response);
       })
     }else if(this.operation == 'Delete'){
-      // this._apiService.deleteStudent(this.selectedStudent.registrationId).subscribe((val)=>{
-      //   this._apiService.getStudentRegister().subscribe((val)=>{
-      //     if(val['data']){
-      //       this.registeredStudentList = val['data'];
-      //     }
-      //   },response=>{
-      //     console.log(response);
-      //   })
-      //   this.toastr.success('Student deleted successfully', 'Success');
-      // },response=>{
-      //   console.log(response)
-      //     this.toastr.error('Delete failed', 'Failed');
-      //     this._subjectService.clearToken(response);
-      // })
+      this._apiService.deletetudentRegister(this.selectedStudent.registrationId).subscribe((val)=>{
+        this._apiService.getStudentRegister().subscribe((val)=>{
+          if(val['data']){
+            this.registeredStudentList = val['data'];
+          }
+        },response=>{
+          console.log(response);
+        })
+        this.toastr.success('Registration deleted successfully', 'Success');
+      },response=>{
+        console.log(response)
+          this.toastr.error('Delete failed', 'Failed');
+          this._subjectService.clearToken(response);
+      })
     }
     //$('#editStudent').modal('hide');
     // }else{
