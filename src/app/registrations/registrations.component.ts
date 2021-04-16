@@ -3,6 +3,7 @@ import * as _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../api.service';
 import { SubjectService } from '../subject.service';
+declare var $:any;
 
 @Component({
   selector: 'app-registrations',
@@ -24,7 +25,8 @@ export class RegistrationsComponent implements OnInit {
       mobile:0,
       email:'',
       class:'',
-      subjects:''
+      subjects:'',
+      tuitionType:''
     }
   }
 
@@ -48,6 +50,15 @@ export class RegistrationsComponent implements OnInit {
   setFlagAndData(val){
      this.operation = val;
      this.removeText ="registration";
+     this.selectedStudent = {
+      name:'',
+      address:'',
+      mobile:0,
+      email:'',
+      class:'',
+      subjects:'',
+      tuitionType:''
+    }
    }
   onSave(data){
      if(this.operation=='Update'){
@@ -80,17 +91,7 @@ export class RegistrationsComponent implements OnInit {
           this._subjectService.clearToken(response);
       })
     }
-    //$('#editStudent').modal('hide');
-    // }else{
-    //   this._apiService.updateAboutUs(this.aboutData).subscribe((val)=>{
-    //     this.aboutData = this.aboutData;
-    //     this.toastr.success('About us updated successfully', 'Success');
-    //   },response=>{
-    //       this.aboutData = this.aboutDataCopy;
-    //       this.toastr.error('Submit failed', 'Failed');
-    //       this._subjectService.clearToken(response);
-    //   })
-    // }
+    $('#editStudent').modal('hide');
   }
 
 }

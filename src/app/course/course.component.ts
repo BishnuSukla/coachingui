@@ -47,6 +47,7 @@ export class CourseComponent implements OnInit {
      name:"",
      emailId:"",
      mobileNo:"",
+     address:"",
      subject:"",
      tuitionType:"",
      class:""
@@ -102,6 +103,15 @@ export class CourseComponent implements OnInit {
       ],
       class:""
      };
+     this.newStudentInfo ={
+      name:"",
+      emailId:"",
+      mobileNo:"",
+      address:"",
+      subject:"",
+      tuitionType:"",
+      class:""
+    }
   }
 
   onSave(data){

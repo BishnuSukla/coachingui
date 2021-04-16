@@ -146,8 +146,13 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">Mobile No </span>
                 </div>
-                <!-- <textarea  name="modal_mobileNo" class="form-control" placeholder="Enter Mobile No"></textarea> -->
                 <input name="modal_mobileNo" class="form-control" placeholder="Enter Mobile No" type="number" [(ngModel)]="newStudentInfo.mobileNo">
+                </div>
+                <div class="form-group input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">Address </span>
+                  </div>
+                   <textarea type="textarea" class="form-control" id="address" placeholder="Enter Address" name="modal_desc" [(ngModel)]="newStudentInfo.address"></textarea>
                 </div>
                 <div class="form-group input-group">
                   <div class="input-group-prepend">

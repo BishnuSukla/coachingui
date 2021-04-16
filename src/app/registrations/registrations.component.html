@@ -16,7 +16,7 @@
           </span></h2>
           <p>{{studentObj.subject}}</p>
           <p>
-              <a class="btn btn-secondary" href="#" role="button">View details &raquo;</a>
+              <a class="btn btn-secondary" data-target="#viewDetails"data-toggle="modal" role="button"(click)="setFlagAndData('View details');setStudentToBeUpdated(studentObj.registrationId)">View details &raquo;</a>
           </p>
         </div>
       </div>
@@ -40,22 +40,38 @@
               </div>
               <div class="form-group input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" for="description">Description </span>
+                    <span class="input-group-text">Email Id </span>
                 </div>
-                <textarea type="textarea" class="form-control" id="description" placeholder="Enter Description" name="modal_desc" [(ngModel)]="selectedStudent.emailId"></textarea>
+                <input type="email" class="form-control" placeholder="Enter Email address"name="modal_emailId" [(ngModel)]="selectedStudent.emailId">
               </div>
               <div class="form-group input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" for="category">Category </span>
+                    <span class="input-group-text" for="category">Mobile No </span>
                 </div>
-                <input type="text" class="form-control" id="category" placeholder="e.g. Academic, Technical, Competitive," name="modal_catagory" [(ngModel)]="selectedStudent.mobileNo">
+                <input type="text" class="form-control" id="category" name="modal_catagory" [(ngModel)]="selectedStudent.mobileNo">
+              </div>
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Address </span>
+                </div>
+                 <textarea type="textarea" class="form-control" id="address"placeholder="Enter Address" name="modal_desc" [(ngModel)]="selectedStudent.address"></textarea>
               </div>
                <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Class </span>
                 </div>
-                <input type="text" class="form-control" id="class" placeholder="e.g. IV, V" name="modal_catagory" [(ngModel)]="selectedStudent.class">
+                <input type="text" class="form-control" id="class" name="modal_catagory" [(ngModel)]="selectedStudent.class">
               </div>
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Tuition Type</span>
+              </div>
+              <select name="modal_tuitionType" class="form-control" [(ngModel)]="selectedStudent.tuitionType">
+                <option value="" disabled selected hidden>Select</option>
+                <option selected="">Home Tuition</option>
+                <option>Group Tuition</option>
+              </select>
+            </div>
             </form>
     </div>
     <div class="modal-footer">
@@ -65,4 +81,56 @@
 
   </div>
 </div>
+</div>
+<div id="viewDetails" class="modal fade" role="dialog" style="max-height:700px;overflow-y: scroll;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h4 class="modal-title">{{operation}}</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body container">
+            <form class="form-horizontal">
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Name </span>
+                </div>
+                    <label name="modal_name"class="form-control">{{selectedStudent.name}}</label>
+              </div>
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Email Id </span>
+                </div>
+                  <label type="email" class="form-control" name="modal_emailId">{{selectedStudent.emailId}}</label>
+              </div>
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Mobile No </span>
+                </div>
+                  <label type="number" class="form-control" name="modal_mobileNo">{{selectedStudent.mobileNo}}</label>
+              </div>
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Address</span>
+                </div>
+                    <textarea [disabled] ='true' name="modal_address"class="form-control">{{selectedStudent.address}}</textarea>
+              </div>
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Class</span>
+                </div>
+                  <label type="text" class="form-control" name="modal_class">{{selectedStudent.class}}</label>
+              </div>
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Tuition Type</span>
+                </div>
+                  <label type="text" class="form-control" name="modal_tuitionType">{{selectedStudent.tuitionType}}</label>
+              </div>
+            </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
+    </div>
+  </div>
 </div>
