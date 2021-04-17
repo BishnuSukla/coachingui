@@ -18,6 +18,9 @@
     </li>
   </ul>
   <div style="margin-top: 5px;" class="tab-content">
+      <div *ngIf="registeredStudentList.length<1 && activeTab==''" style="text-align: center;">New registrations not available!</div>
+      <div *ngIf="registeredStudentList.length<1 && activeTab=='approved'" style="text-align: center;">Approved registrations not available!</div>
+      <div *ngIf="registeredStudentList.length<1 && activeTab=='rejected'" style="text-align: center;">Rejected registrations not available!</div>
       <div id="newReg" class="row tab-pane fade in active show">
         <div class="col-md-4" *ngFor="let studentObj of registeredStudentList | filter:filterArgs1">
           <h2>{{studentObj.name}}&nbsp;<span *ngIf="userLoggedIn" class="editPencil">
