@@ -1,9 +1,9 @@
-<h3 class="display-6"><i class="fa fa-bell-o" aria-hidden="true"></i>&nbsp;What's new&nbsp;<span data-toggle="modal" data-target="#newNotification" (click)="setFlagAndData('add')" *ngIf="userLoggedIn" class="editPencil"><i class="fa fa-plus" aria-hidden="true"></i></span></h3>
+<h3 class="display-6"><i class="fa fa-bell-o" aria-hidden="true"></i>&nbsp;What's new&nbsp;<span data-toggle="modal" data-target="#newNotification" (click)="setFlagAndData('Add')" *ngIf="userLoggedIn" class="editPencil"><i class="fa fa-plus" aria-hidden="true"></i></span></h3>
 <div id="noty-holder">
     <ul class="list-group">
         <li style="margin-bottom: 2px;" *ngFor="let notification of notifications" class="list-group-item list-group-item-action"><i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;{{notification.notification}} &nbsp;
-          <i *ngIf="userLoggedIn" class="fa fa-pencil editPencil_small" data-toggle="modal" data-target="#newNotification" (click)="setFlagAndData('update');setNotificationToBeUpdated(notification.notificationId)" aria-hidden="true"></i>&nbsp;
-          <i *ngIf="userLoggedIn" data-toggle="modal" data-target="#confirmModal" (click)="setFlagAndData('delete');setNotificationToBeUpdated(notification.notificationId)" class="fa fa-times removeIcon_small" aria-hidden="true"></i>
+          <i *ngIf="userLoggedIn" class="fa fa-pencil editPencil_small" data-toggle="modal" data-target="#newNotification" (click)="setFlagAndData('Update');setNotificationToBeUpdated(notification.notificationId)" aria-hidden="true"></i>&nbsp;
+          <i *ngIf="userLoggedIn" data-toggle="modal" data-target="#confirmModal" (click)="setFlagAndData('Delete');setNotificationToBeUpdated(notification.notificationId)" class="fa fa-times removeIcon_small" aria-hidden="true"></i>
         </li>
     </ul>
 </div>
@@ -15,16 +15,16 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-            <h4 class="modal-title">Add Notifications</h4>
+            <h4 class="modal-title">{{flag}} Notification</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body container">
                 <form class="form-horizontal">
-                  <div class="form-group">
-                    <label class="control-label col-sm-2" for="title">Message:</label>
-                    <div class="col-sm-12">
-                      <input type="text" class="form-control" id="title" placeholder="Enter Message" name="modal_not_message" [(ngModel)]="newNotification.notification">
+                  <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Message</span>
                     </div>
+                    <input type="text" class="form-control" id="email" placeholder="Enter Message" name="modal_not_message" [(ngModel)]="newNotification.notification">
                   </div>
                   <!-- <div class="form-group">
                     <label class="control-label col-sm-2" for="description">Description:</label>

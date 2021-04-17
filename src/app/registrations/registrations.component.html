@@ -1,33 +1,36 @@
-<div class="container page_header_margin" style="text-align: left;">
+
+<div  class="container page_header_margin" style="text-align: left;">
     <form class="form-inline my-2 my-lg-0">
-      <h3 *ngIf="userLoggedIn"><span class="editPencil" data-toggle="modal" data-target="#editStudent" ></span></h3>
-      &nbsp;&nbsp;
-      <input class="form-control mr-sm-2" type="text" placeholder="Filter Students" [ngModelOptions]="{standalone: true}" [(ngModel)]="filterArgs1" aria-label="Search">
+      <input *ngIf="registeredStudentList.length>0" class="form-control mr-sm-2" type="text" placeholder="Filter Registrations" [ngModelOptions]="{standalone: true}" [(ngModel)]="filterArgs1" aria-label="Search">
     </form>
-  </div>
-  <hr/>
-  <div class="container">
+</div>
+<hr/>
+<div class="container">
       <!-- Example row of columns -->
+      <div style="text-align: center;" *ngIf="registeredStudentList.length<1">Registrations not available!</div>
       <div class="row" >
         <div class="col-md-4" *ngFor="let studentObj of registeredStudentList | filter:filterArgs1">
           <h2>{{studentObj.name}}&nbsp;<span *ngIf="userLoggedIn" class="editPencil">
             <i *ngIf="userLoggedIn" class="fa fa-pencil editPencil_small" data-toggle="modal" data-target="#editStudent" (click)="setFlagAndData('Update');setStudentToBeUpdated(studentObj.registrationId)" aria-hidden="true"></i>&nbsp;
             <i *ngIf="userLoggedIn" data-toggle="modal" data-target="#confirmModal" (click)="setFlagAndData('Delete');setStudentToBeUpdated(studentObj.registrationId)" class="fa fa-times removeIcon_small" aria-hidden="true"></i>
           </span></h2>
-          <p>{{studentObj.subject}}</p>
+          <div><b>Course:</b> {{studentObj.subject}}</div>
+          <div><b>Class:</b> {{studentObj.class}}</div>
+          <div><b>Tution Type:</b> {{studentObj.tuitionType}}</div>
+          <br>
           <p>
-              <a class="btn btn-secondary" data-target="#viewDetails"data-toggle="modal" role="button"(click)="setFlagAndData('View details');setStudentToBeUpdated(studentObj.registrationId)">View details &raquo;</a>
+              <a class="btn btn-secondary" href="#" data-target="#viewDetails"data-toggle="modal" role="button"(click)="setFlagAndData('View details');setStudentToBeUpdated(studentObj.registrationId)">View details &raquo;</a>
           </p>
         </div>
       </div>
       <hr>
-  </div>
+</div>
 <app-confirm *ngIf="removeText=='registration'" [removeItem]="removeText" (removeConfirmationEvent)="onSave($event)"></app-confirm>
 <div id="editStudent" class="modal fade" role="dialog" style="max-height:700px;overflow-y: scroll;">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-          <h4 class="modal-title">{{operation}} Student Details</h4>
+          <h4 class="modal-title">{{operation}} Registration Details</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body container">
@@ -86,7 +89,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-          <h4 class="modal-title">{{operation}}</h4>
+          <h4 class="modal-title">Registration Details</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body container">

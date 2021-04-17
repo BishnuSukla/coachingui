@@ -11,17 +11,17 @@
                 <div class="imgcontainer">
                   <img src="assets/img/logo.png" class="avatar"/>
                 </div>
-                <div class="form-group">
-                  <label class="control-label" for="title">Username:</label>
-                  <div class="">
-                    <input type="text" class="form-control" id="title" [(ngModel)]="userCredential.username" placeholder="Enter user name" name="username">
+                <div class="form-group input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Username</span>
                   </div>
+                  <input type="text" class="form-control" id="title" [(ngModel)]="userCredential.username" placeholder="Enter user name" name="username">
                 </div>
-                <div class="form-group">
-                  <label class="control-label" for="mobile">Password:</label>
-                  <div class="">
-                    <input type="password" class="form-control" id="mobile" [(ngModel)]="userCredential.password"placeholder="Enter password" name="password">
+                <div class="form-group input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Password</span>
                   </div>
+                  <input type="password" class="form-control" id="mobile" [(ngModel)]="userCredential.password"placeholder="Enter password" name="password">
                 </div>
               </form>
       </div>

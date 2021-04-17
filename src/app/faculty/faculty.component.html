@@ -2,21 +2,23 @@
   <form class="form-inline my-2 my-lg-0">
     <h3 *ngIf="userLoggedIn">Faculties <span class="editPencil" data-toggle="modal" data-target="#addFaculties" (click)="setFlagAndData('Add')" ><i class="fa fa-plus"></i></span></h3>
     &nbsp;&nbsp;
-    <input class="form-control mr-sm-2" type="text" placeholder="Filter Faculty" [ngModelOptions]="{standalone: true}" [(ngModel)]="filterArgs1" aria-label="Search">
+    <input *ngIf="faculties.length>0" class="form-control mr-sm-2" type="text" placeholder="Filter Faculty" [ngModelOptions]="{standalone: true}" [(ngModel)]="filterArgs1" aria-label="Search">
   </form>
 </div>
 <hr/>
 <div class="container">
-    <!-- Example row of columns -->
+  <div style="text-align: center;" *ngIf="faculties.length<1">Faculties not available!</div>
     <div class="row" >
       <div class="col-md-4" *ngFor="let faculty of faculties | filter:filterArgs1">
         <h2>{{faculty.name}}&nbsp;<span *ngIf="userLoggedIn" class="editPencil">
           <i *ngIf="userLoggedIn" class="fa fa-pencil editPencil_small" data-toggle="modal" data-target="#addFaculties" (click)="setFlagAndData('Update');setFacultyToBeUpdated(faculty.facultyId)" aria-hidden="true"></i>&nbsp;
           <i *ngIf="userLoggedIn" data-toggle="modal" data-target="#confirmModal" (click)="setFlagAndData('Delete');setFacultyToBeUpdated(faculty.facultyId)" class="fa fa-times removeIcon_small" aria-hidden="true"></i>
         </span></h2>
-        <p>{{faculty.experience}}</p>
+        <div><b>Teaching Experience:</b> {{faculty.experience}} years</div>
+        <div><b>Subjects teaches:</b> {{faculty.subjects}}</div>
+        <br>
         <p>
-            <a class="btn btn-secondary" href="#" role="button">View details &raquo;</a>
+            <a data-toggle="modal" data-target="#viewFacultyDetails" href="#" class="btn btn-secondary" role="button" (click)="setFlagAndData('View details');setFacultyToBeUpdated(faculty.facultyId)">View details &raquo;</a>
         </p>
       </div>
     </div>
@@ -29,77 +31,138 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-          <h4 class="modal-title"> Faculty</h4>
+          <h4 class="modal-title"> {{operation}} Faculty</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body container">
             <form class="form-horizontal">
-              <div class="form-group">
-                <label class="control-label col-sm-2" for="facultyName">Name:</label>
-                <div class="col-sm-12">
-                  <input type="text" class="form-control" id="facultyName" placeholder="Enter Faculty Name" name="modal_facultyName" [(ngModel)]="newFaculty.name">
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Name </span>
                 </div>
+                <input type="text" class="form-control" id="facultyName" placeholder="Enter Faculty Name"  name="modal_facultyName" [(ngModel)]="newFaculty.name">
               </div>
-              <div class="form-group">
-                <label class="control-label col-sm-2" for="experience">Experience:</label>
-                <div class="col-sm-12">
-                  <input type="number" class="form-control" id="experience" placeholder="Enter experience" name="modal_experience" [(ngModel)]="newFaculty.experience">
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Experience(y)</span>
                 </div>
+                <input type="number" class="form-control" id="experience" placeholder="Enter experience" name="modal_experience" [(ngModel)]="newFaculty.experience">
               </div>
-              
-              <div class="form-group" >
-                <!-- <div class="form-group">
-                  <label class="control-label col-sm-2" for="{{tution.type}}">{{tution.type}} Tuition</label>
-                  <input type="checkbox" id="{{tution.type}}"  >
-                </div> -->
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="qualification">Qualification:</label>
-                    <div class="col-sm-12">
-                    <input type="text" class="form-control" id="qualification" placeholder="Enter Qualification" name="modal_qualification" [(ngModel)]="newFaculty.degree.name">
-                  </div>
-                  <label class="control-label col-sm-2" for="institute">Institute:</label>
-                  <div class="col-sm-12">
-                  <input type="text" class="form-control" id="institute" placeholder="Enter Institute" name="modal_institute" [(ngModel)]="newFaculty.degree.college">
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Qualification</span>
                 </div>
-                </div>
+                <input type="text" class="form-control" id="qualification" placeholder="Enter Qualification" name="modal_qualification" [(ngModel)]="newFaculty.degree.name">
               </div>
-              <div class="form-group">
-                <label class="control-label col-sm-2" for="address">Address:</label>
-                <div class="col-sm-12">
-                  <input type="text" class="form-control" id="address" placeholder="Enter Address" name="modal_address" [(ngModel)]="newFaculty.address">
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Institute</span>
                 </div>
+                <input type="text" class="form-control" id="institute" placeholder="Enter Institute" name="modal_institute" [(ngModel)]="newFaculty.degree.college">
               </div>
-              <div class="form-group">
-                <label class="control-label col-sm-2" for="mobile">Mobile:</label>
-                <div class="col-sm-12">
-                  <input type="number" class="form-control" id="mobile" placeholder="Enter Mobile" name="modal_mobile" [(ngModel)]="newFaculty.mobile">
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Address</span>
                 </div>
+                <input type="text" class="form-control" id="address" placeholder="Enter Address" name="modal_address" [(ngModel)]="newFaculty.address">
               </div>
-              <div class="form-group">
-                <label class="control-label col-sm-2" for="email">Email:</label>
-                <div class="col-sm-12">
-                  <input type="text" class="form-control" id="email" placeholder="Enter Email id" name="modal_email" [(ngModel)]="newFaculty.email">
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Mobile</span>
                 </div>
+                <input type="number" class="form-control" id="mobile" placeholder="Enter Mobile" name="modal_mobile" [(ngModel)]="newFaculty.mobile">
               </div>
-              <div class="form-group">
-                <label class="control-label col-sm-2" for="class">Class:</label>
-                <div class="col-sm-12">
-                  <input type="text" class="form-control" id="class" placeholder="e.g. IV, V" name="modal_class" [(ngModel)]="newFaculty.class">
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Email</span>
                 </div>
+                <input type="text" class="form-control" id="email" placeholder="Enter Email id" name="modal_email" [(ngModel)]="newFaculty.email">
               </div>
-              <div class="form-group">
-                <label class="control-label col-sm-2" for="subject">Subject:</label>
-                <div class="col-sm-12">
-                  <input type="text" class="form-control" id="subject" placeholder="e.g. Science, Maths" name="modal_subject" [(ngModel)]="newFaculty.subjects">
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Class</span>
                 </div>
+                <input type="text" class="form-control" id="class" placeholder="e.g. IV, V" name="modal_class" [(ngModel)]="newFaculty.class">
               </div>
-              <!-- <div class="form-group">
-                <p>Home Tution Available:</p>
-                <input type="radio" id="yes" name="turion" value="yes" (click)="homeTutionAvalability('yes')">
-                <label for="yes">yes</label><br>
-                <input type="radio" id="no" name="turion" value="no" (click)="homeTutionAvalability('no')">
-                <label for="no">no</label><br>  
-              </div> -->
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Subject</span>
+                </div>
+                <input type="text" class="form-control" id="subject" placeholder="e.g. Science, Maths" name="modal_subject" [(ngModel)]="newFaculty.subjects">
+              </div>
+            </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-outline-success" (click)="onSave(undefined)">Save</button>
+    </div>
+
+  </div>
+</div>
+</div>
+<div id="viewFacultyDetails" class="modal fade" role="dialog" style="max-height:700px;overflow-y: scroll;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h4 class="modal-title">Faculty Details</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body container">
+            <form class="form-horizontal">
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Name </span>
+                </div>
+                <label class="form-control" id="facultyName">{{newFaculty.name}}</label>
+              </div>
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Experience</span>
+                </div>
+                <label class="form-control" id="fexperience">{{newFaculty.experience}} years</label>
+              </div>
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Qualification</span>
+                </div>
+                <label class="form-control" id="fqualification">{{newFaculty.degree.name}}</label>
+              </div>
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Institute</span>
+                </div>
+                <label class="form-control" id="finstitute">{{newFaculty.degree.college}}</label>
+              </div>
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Address</span>
+                </div>
+                <label class="form-control" id="faddress">{{newFaculty.address}}</label>
+              </div>
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Mobile</span>
+                </div>
+                <label class="form-control" id="fmobile">{{newFaculty.mobile}}</label>
+              </div>
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Email</span>
+                </div>
+                <label class="form-control" id="femail">{{newFaculty.email}}</label>
+              </div>
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Class</span>
+                </div>
+                <label class="form-control" id="fclass">{{newFaculty.class}}</label>
+              </div>
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Subject</span>
+                </div>
+                <label class="form-control" id="fsubject">{{newFaculty.subjects}}</label>
+              </div>
             </form>
     </div>
     <div class="modal-footer">

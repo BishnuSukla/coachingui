@@ -2,12 +2,12 @@
   <form class="form-inline my-2 my-lg-0">
     <h3 *ngIf="userLoggedIn">Courses <span class="editPencil" data-toggle="modal" data-target="#addCourses" (click)="setFlagAndData('Add')" ><i class="fa fa-plus"></i></span></h3>
     &nbsp;&nbsp;
-    <input class="form-control mr-sm-2" type="text" placeholder="Filter courses" [ngModelOptions]="{standalone: true}" [(ngModel)]="filterArgs" aria-label="Search">
+    <input *ngIf="courses.length>0" class="form-control mr-sm-2" type="text" placeholder="Filter courses" [ngModelOptions]="{standalone: true}" [(ngModel)]="filterArgs" aria-label="Search">
   </form>
 </div>
 <hr/>
 <div class="container">
-    <!-- Example row of columns -->
+  <div style="text-align: center;" *ngIf="courses.length<1">Courses not available!</div>
     <div class="row" >
       <div class="col-md-4" *ngFor="let course of courses | filter:filterArgs">
         <h2>{{course.name}}&nbsp;<span *ngIf="userLoggedIn" class="editPencil">
@@ -17,16 +17,15 @@
         <p>{{course.topicCovered}}</p>
         <p *ngIf="course.typeOfTution && course.typeOfTution[0] && course.typeOfTution[0].available"><small style="font-style: italic;color:#721c24;"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Home tution available</small></p>
         <p>
-            <a data-toggle="modal" data-target="#viewDetails" class="btn btn-secondary" role="button" (click)="setFlagAndData('View details');setCourseToBeUpdated(course.courseId)">View details &raquo;</a>&nbsp;
+            <a data-toggle="modal" data-target="#viewDetails" href="#" class="btn btn-secondary" role="button" (click)="setFlagAndData('View details');setCourseToBeUpdated(course.courseId)">View details &raquo;</a>&nbsp;
             <a class="btn btn-outline-success" href="#" role="button" data-toggle="modal" data-target="#viewDetails"(click)="setFlagAndData('Enter Student Details');onRegisterClick(course.name)">Register</a>
         </p>
       </div>
     </div>
 
     <hr>
-
 </div>
-<app-confirm *ngIf="removeText=='course'" [removeItem]="removeText" (removeConfirmationEvent)="onSave($event)"></app-confirm>
+<app-confirm [removeItem]="removeText" (removeConfirmationEvent)="onSave($event)"></app-confirm>
 <div id="addCourses" class="modal fade" role="dialog" style="max-height:700px;overflow-y: scroll;">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -92,7 +91,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-          <h4 class="modal-title">{{operation}}</h4>
+          <h4 class="modal-title">Course Details</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body container">
@@ -102,13 +101,13 @@
                   <div class="input-group-prepend">
                       <span class="input-group-text">Name </span>
                   </div>
-                      <label name="modal_name"class="form-control">{{newCourse.name}}</label>
+                      <label name="modal_name" class="form-control">{{newCourse.name}}</label>
                 </div>
                 <div class="form-group input-group">
                   <div class="input-group-prepend">
                       <span class="input-group-text">Description </span>
                   </div>
-                      <textarea [disabled] ='true' name="modal_name"class="form-control">{{newCourse.topicCovered}}</textarea>
+                      <textarea [readonly] ='true' name="modal_name"class="form-control">{{newCourse.topicCovered}}</textarea>
                 </div>
                 <div class="form-group input-group" *ngFor="let tution of newCourse.typeOfTution">
                   <div class="input-group-prepend" *ngIf ="tution.available">

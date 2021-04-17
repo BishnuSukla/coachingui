@@ -40,7 +40,7 @@ export class NotificationComponent implements OnInit {
 
   setFlagAndData(val){
     this.flag = val;
-    if(this.flag == 'delete'){
+    if(this.flag == 'Delete'){
       this.removeText='notification';
     }else{
       this.removeText = '';
@@ -54,7 +54,7 @@ export class NotificationComponent implements OnInit {
   }
 
   addNotification(data){
-    if(this.flag=='add'){
+    if(this.flag=='Add'){
       this._apiService.createNotification(this.newNotification).subscribe((val)=>{
         this._apiService.getNotifications().subscribe((val)=>{
           if(val['data']){
@@ -68,7 +68,7 @@ export class NotificationComponent implements OnInit {
           this.toastr.error('Submit failed', 'Failed');
           this._subjectService.clearToken(response);
       })
-    }else if(this.flag=='update'){
+    }else if(this.flag=='Update'){
       this._apiService.updateNotification(this.newNotification).subscribe((val)=>{
         this._apiService.getNotifications().subscribe((val)=>{
           if(val['data']){
@@ -82,7 +82,7 @@ export class NotificationComponent implements OnInit {
           this.toastr.error('Submit failed', 'Failed');
           this._subjectService.clearToken(response);
       })
-    }else if(this.flag == 'delete'){
+    }else if(this.flag == 'Delete'){
       this._apiService.deleteNotification(this.newNotification.notificationId).subscribe((val)=>{
         this._apiService.getNotifications().subscribe((val)=>{
           if(val['data']){

@@ -24,29 +24,29 @@
         <div class="modal-body">
             <div class="container">
                 <form class="form-horizontal">
-                  <div class="form-group">
-                    <label class="control-label col-sm-2" for="title">Title:</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="title" placeholder="Enter Title" name="modal_title" [(ngModel)]="aboutData.title">
+                  <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Title</span>
                     </div>
+                    <input type="text" class="form-control" id="title" placeholder="Enter Title" name="modal_title" [(ngModel)]="aboutData.title">
                   </div>
-                  <div class="form-group">
-                    <label class="control-label col-sm-2" for="description">Description:</label>
-                    <div class="col-sm-10">
-                      <textarea type="textarea" class="form-control" id="description" placeholder="Enter Description" name="modal_desc" [(ngModel)]="aboutData.description"></textarea>
+                  <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Description</span>
                     </div>
+                    <textarea type="textarea" class="form-control" id="description" placeholder="Enter Description" name="modal_desc" [(ngModel)]="aboutData.description"></textarea>
                   </div>
-                  <div class="form-group">
-                    <label class="control-label col-sm-2" for="mobile">Mobile:</label>
-                    <div class="col-sm-10">
-                      <input type="number" class="form-control" id="mobile" placeholder="Enter Description" name="modal_mobile" [(ngModel)]="aboutData.contact.phone">
+                  <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Mobile</span>
                     </div>
+                    <input type="number" class="form-control" id="mobile" placeholder="Enter Description" name="modal_mobile" [(ngModel)]="aboutData.contact.phone">
                   </div>
-                  <div class="form-group">
-                    <label class="control-label col-sm-2" for="email">Email:</label>
-                    <div class="col-sm-10">
-                      <input type="email" class="form-control" id="email" placeholder="Enter Email" name="modal_email" [(ngModel)]="aboutData.contact.email">
+                  <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Email</span>
                     </div>
+                    <input type="email" class="form-control" id="email" placeholder="Enter Email" name="modal_email" [(ngModel)]="aboutData.contact.email">
                   </div>
                 </form>
               </div>
@@ -71,8 +71,18 @@
         </div>
         <div class="modal-body">
             <div class="container">
-              <p><i style="font-size:20px;" class="fa fa-mobile" aria-hidden="true"></i>&nbsp;{{aboutData.contact.phone}}</p>
-              <p><i style="font-size:15px;" class="fa fa-envelope" aria-hidden="true"></i>&nbsp;{{aboutData.contact.email}}</p>
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Mobile</span>
+                </div>
+                <label class="form-control" id="amobile">{{aboutData.contact.phone}}</label>
+              </div>
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Email</span>
+                </div>
+                <label class="form-control" id="aemail">{{aboutData.contact.email}}</label>
+              </div>
                 <!-- <form class="form-horizontal">
                   <div class="form-group">
                     <label class="control-label col-sm-2" for="title">Title:</label>
