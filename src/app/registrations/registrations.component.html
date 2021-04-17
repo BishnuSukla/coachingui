@@ -5,10 +5,20 @@
     </form>
 </div>
 <hr/>
-<div class="container">
-      <!-- Example row of columns -->
-      <div style="text-align: center;" *ngIf="registeredStudentList.length<1">Registrations not available!</div>
-      <div class="row" >
+<div class="container"> 
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active show" (click)="setTab('');" data-toggle="tab" href="#newReg">New</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" (click)="setTab('approved');" href="#newReg">Approved</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " data-toggle="tab" (click)="setTab('rejected');" href="#newReg">Rejected</a>
+    </li>
+  </ul>
+  <div style="margin-top: 5px;" class="tab-content">
+      <div id="newReg" class="row tab-pane fade in active show">
         <div class="col-md-4" *ngFor="let studentObj of registeredStudentList | filter:filterArgs1">
           <h2>{{studentObj.name}}&nbsp;<span *ngIf="userLoggedIn" class="editPencil">
             <i *ngIf="userLoggedIn" class="fa fa-pencil editPencil_small" data-toggle="modal" data-target="#editStudent" (click)="setFlagAndData('Update');setStudentToBeUpdated(studentObj.registrationId)" aria-hidden="true"></i>&nbsp;
@@ -20,11 +30,12 @@
           <div><b>Registered On:</b> {{studentObj.createdAt| date:'fullDate'}}</div>
           <br>
           <p>
-              <a class="btn btn-secondary" href="#" data-target="#viewDetails"data-toggle="modal" role="button"(click)="setFlagAndData('View details');setStudentToBeUpdated(studentObj.registrationId)">View details &raquo;</a>
+              <a class="btn btn-secondary" href="#" data-target="#viewStdDetails"data-toggle="modal" role="button"(click)="setFlagAndData('View details');setStudentToBeUpdated(studentObj.registrationId)">View details &raquo;</a>
           </p>
         </div>
       </div>
-      <hr>
+  </div>
+  <hr/>
 </div>
 <app-confirm *ngIf="removeText=='registration'" [removeItem]="removeText" (removeConfirmationEvent)="onSave($event)"></app-confirm>
 <div id="editStudent" class="modal fade" role="dialog" style="max-height:700px;overflow-y: scroll;">
@@ -86,7 +97,7 @@
   </div>
 </div>
 </div>
-<div id="viewDetails" class="modal fade" role="dialog" style="max-height:700px;overflow-y: scroll;">
+<div id="viewStdDetails" class="modal fade" role="dialog" style="max-height:700px;overflow-y: scroll;">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -134,6 +145,7 @@
             </form>
     </div>
     <div class="modal-footer">
+      <button *ngFor="let button of buttons | keyvalue" class="{{button.value.bsClass}}" (click)="stateChange(button.value.state)">{{button.key}}</button>
       <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
     </div>
   </div>

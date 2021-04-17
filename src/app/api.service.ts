@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SubjectService } from './subject.service';
 
@@ -67,9 +67,12 @@ export class ApiService {
   studentRegister(register){
     return this.http.post(url+"/api/registration",{register}); 
   }
-  getStudentRegister(){
-    let headers = new HttpHeaders().set("token", localStorage.getItem('token')).set("Content-Type", "application/json");;
-    return this.http.get(url+"/api/get-registrations",{headers}); 
+  getStudentRegister(status){
+    const params = new HttpParams({
+      fromString: 'status:'+status
+    });
+    let headers = new HttpHeaders().set("token", localStorage.getItem('token')).set("Content-Type", "application/json");
+    return this.http.request('get',url+"/api/get-registrations?status="+status,{headers}); 
   }
   deletetudentRegister(registrationId){
     const options = {
