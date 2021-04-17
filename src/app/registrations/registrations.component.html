@@ -17,6 +17,7 @@
           <div><b>Course:</b> {{studentObj.subject}}</div>
           <div><b>Class:</b> {{studentObj.class}}</div>
           <div><b>Tution Type:</b> {{studentObj.tuitionType}}</div>
+          <div><b>Registered On:</b> {{studentObj.createdAt| date:'fullDate'}}</div>
           <br>
           <p>
               <a class="btn btn-secondary" href="#" data-target="#viewDetails"data-toggle="modal" role="button"(click)="setFlagAndData('View details');setStudentToBeUpdated(studentObj.registrationId)">View details &raquo;</a>
