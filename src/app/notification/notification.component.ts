@@ -100,6 +100,8 @@ export class NotificationComponent implements OnInit {
       this.removeText = '';
     }
     $('#newNotification').modal('hide');
+    $('#confirmModalForNotification').modal('hide');
+    
   }
 
 

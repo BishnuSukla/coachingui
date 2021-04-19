@@ -3,13 +3,33 @@
     <ul class="list-group">
         <li style="margin-bottom: 2px;" *ngFor="let notification of notifications" class="list-group-item list-group-item-action"><i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;{{notification.notification}} &nbsp;
           <i *ngIf="userLoggedIn" class="fa fa-pencil editPencil_small" data-toggle="modal" data-target="#newNotification" (click)="setFlagAndData('Update');setNotificationToBeUpdated(notification.notificationId)" aria-hidden="true"></i>&nbsp;
-          <i *ngIf="userLoggedIn" data-toggle="modal" data-target="#confirmModal" (click)="setFlagAndData('Delete');setNotificationToBeUpdated(notification.notificationId)" class="fa fa-times removeIcon_small" aria-hidden="true"></i>
+          <i *ngIf="userLoggedIn" data-toggle="modal" data-target="#confirmModalForNotification" (click)="setFlagAndData('Delete');setNotificationToBeUpdated(notification.notificationId)" class="fa fa-times removeIcon_small" aria-hidden="true"></i>
         </li>
     </ul>
 </div>
+<!-- 
+<app-confirm *ngIf="removeText=='notification'" [removeItem]="removeText" (removeConfirmationEvent)="addNotification($event)"></app-confirm> -->
+<div id="confirmModalForNotification" class="modal fade" role="dialog" style="max-height:700px;overflow-y: scroll;">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+          <h4 class="modal-title">Confirmation</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+          <div class="container">
+            <p>Are you sure you want to delete notification ?</p>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-default" data-dismiss="modal">No</button>
+        <button type="submit" (click)="addNotification($event)" class="btn btn-outline-success">Yes</button>
+      </div>
+    </div>
 
-<app-confirm *ngIf="removeText=='notification'" [removeItem]="removeText" (removeConfirmationEvent)="addNotification($event)"></app-confirm>
-
+  </div>
+</div>
 <div id="newNotification" class="modal fade" role="dialog" style="max-height:700px;overflow-y: scroll;">
     <div class="modal-dialog">
       <!-- Modal content-->

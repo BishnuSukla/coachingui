@@ -161,6 +161,7 @@ export class CourseComponent implements OnInit {
       this.removeText='course';
     }
     $('#addCourses').modal('hide');
+    $('#confirmModal').modal('hide');
     // }else{
     //   this._apiService.updateAboutUs(this.aboutData).subscribe((val)=>{
     //     this.aboutData = this.aboutData;
