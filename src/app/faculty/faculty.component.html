@@ -14,7 +14,7 @@
           <i *ngIf="userLoggedIn" class="fa fa-pencil editPencil_small" data-toggle="modal" data-target="#addFaculties" (click)="setFlagAndData('Update');setFacultyToBeUpdated(faculty.facultyId)" aria-hidden="true"></i>&nbsp;
           <i *ngIf="userLoggedIn" data-toggle="modal" data-target="#confirmModal" (click)="setFlagAndData('Delete');setFacultyToBeUpdated(faculty.facultyId)" class="fa fa-times removeIcon_small" aria-hidden="true"></i>
         </span></h2>
-        <div><b>Teaching Experience:</b> {{faculty.experience}} years</div>
+        <div *ngIf="faculty.experience"><b>Teaching Experience:</b> {{faculty.experience}} years</div>
         <div><b>Subjects teaches:</b> {{faculty.subjects}}</div>
         <br>
         <p>
@@ -115,7 +115,7 @@
                 </div>
                 <label class="form-control" id="facultyName">{{newFaculty.name}}</label>
               </div>
-              <div *ngIf="newFaculty.experience" class="form-group input-group">
+              <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Experience</span>
                 </div>
