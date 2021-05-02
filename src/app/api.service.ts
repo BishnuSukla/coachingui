@@ -103,6 +103,13 @@ export class ApiService {
     }
     return this.http.request('delete',url+"/api/delete-faculty",options); 
   }
+
+  isValidEmail(emailId){
+    return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(emailId);
+  }
+  isValidPhone(phone){
+    return /^\d{10}$/.test(phone);
+  }
 }
 
 

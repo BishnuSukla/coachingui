@@ -18,6 +18,8 @@ export class FacultyComponent implements OnInit {
   removeText='';
   operation:string;
   filterArgs1:string;
+  facultySubmitbtnDisabled:boolean;
+  validateFaculty:any;
   constructor(private _apiService:ApiService, private _subjectService:SubjectService, private toastr: ToastrService) {
     this.filterArgs1 = '';
     this.newFaculty = {
@@ -27,12 +29,13 @@ export class FacultyComponent implements OnInit {
           college:''
       },
       address:'',
-      experience:0,
-      mobile:0,
+      experience:null,
+      mobile:null,
       email:'',
       class:'',
       subjects:''
     }
+    this.facultySubmitbtnDisabled = true;
    }
 
   ngOnInit(): void {
@@ -47,10 +50,65 @@ export class FacultyComponent implements OnInit {
     },response=>{
       console.log(response);
      })
+     this.validateFaculty = {
+      name:"",
+      degreeName:"",
+      institute:"",
+      subject:""
+    }
   }
 
   setFacultyToBeUpdated(facultyId){
     this.newFaculty= _.cloneDeep(_.find(this.faculties,{facultyId:facultyId}));
+    this.facultySubmitbtnDisabled = true;
+  }
+  disableBtn(){
+    this.facultySubmitbtnDisabled = this.validateFacultyData();
+  }
+
+  validateFacultyData(){
+    let flag = false;
+    if(this.newFaculty.name.trim() == this.validateFaculty.name){
+      $('#facultyName').addClass('is-invalid');
+      flag = true;
+    }else{
+      $('#facultyName').removeClass('is-invalid');
+    }
+    if(this.newFaculty.degree && this.newFaculty.degree.name.trim() == this.validateFaculty.degreeName){
+      $('#fqualification').addClass('is-invalid');
+      flag = true;
+    }else{
+      $('#fqualification').removeClass('is-invalid');
+    }
+    if(this.newFaculty.degree && this.newFaculty.degree.college.trim() == this.validateFaculty.institute){
+      $('#finstitute').addClass('is-invalid');
+      flag = true;
+    }else{
+      $('#finstitute').removeClass('is-invalid');
+    }
+    if(this.newFaculty.subjects.trim() == this.validateFaculty.subject){
+      $('#fsubject').addClass('is-invalid');
+      flag = true;
+    }else{
+      $('#fsubject').removeClass('is-invalid');
+    }
+    if(this.newFaculty.email){
+      if(!this._apiService.isValidEmail(this.newFaculty.email)){
+        $('#femail').addClass('is-invalid');
+        flag = true;
+      }else{
+        $('#femail').removeClass('is-invalid');
+      }
+    }
+    if(this.newFaculty.mobile){
+      if(!this._apiService.isValidPhone(this.newFaculty.mobile)){
+        $('#fmobile').addClass('is-invalid');
+        flag = true;
+      }else{
+        $('#fmobile').removeClass('is-invalid');
+      }
+    }
+    return flag;
   }
 
   setFlagAndData(val){
@@ -63,8 +121,8 @@ export class FacultyComponent implements OnInit {
             college:''
         },
         address:'',
-        experience:0,
-        mobile:0,
+        experience:null,
+        mobile:null,
         email:'',
         class:'',
         subjects:''

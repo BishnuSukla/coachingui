@@ -38,63 +38,63 @@
             <form class="form-horizontal">
               <div class="form-group input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Name </span>
+                    <span class="input-group-text">Name* </span>
                 </div>
-                <input type="text" class="form-control" id="facultyName" placeholder="Enter Faculty Name"  name="modal_facultyName" [(ngModel)]="newFaculty.name">
+                <input type="text" class="form-control" id="facultyName" placeholder="Enter Faculty Name"  name="modal_facultyName" [(ngModel)]="newFaculty.name" (change)="disableBtn()">
               </div>
               <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Experience(y)</span>
                 </div>
-                <input type="number" class="form-control" id="experience" placeholder="Enter experience" name="modal_experience" [(ngModel)]="newFaculty.experience">
+                <input type="number" class="form-control" id="fexperience" placeholder="Enter experience" name="modal_experience" [(ngModel)]="newFaculty.experience" (change)="disableBtn()">
               </div>
               <div class="form-group input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Qualification</span>
+                    <span class="input-group-text">Qualification*</span>
                 </div>
-                <input type="text" class="form-control" id="qualification" placeholder="Enter Qualification" name="modal_qualification" [(ngModel)]="newFaculty.degree.name">
+                <input type="text" class="form-control" id="fqualification" placeholder="Enter Qualification" name="modal_qualification" [(ngModel)]="newFaculty.degree.name" (change)="disableBtn()">
               </div>
               <div class="form-group input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Institute</span>
+                    <span class="input-group-text">Institute*</span>
                 </div>
-                <input type="text" class="form-control" id="institute" placeholder="Enter Institute" name="modal_institute" [(ngModel)]="newFaculty.degree.college">
+                <input type="text" class="form-control" id="finstitute" placeholder="Enter Institute" name="modal_institute" [(ngModel)]="newFaculty.degree.college" (change)="disableBtn()">
               </div>
               <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Address</span>
                 </div>
-                <input type="text" class="form-control" id="address" placeholder="Enter Address" name="modal_address" [(ngModel)]="newFaculty.address">
+                <input type="text" class="form-control" id="faddress" placeholder="Enter Address" name="modal_address" [(ngModel)]="newFaculty.address" (change)="disableBtn()">
               </div>
               <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Mobile</span>
                 </div>
-                <input type="number" class="form-control" id="mobile" placeholder="Enter Mobile" name="modal_mobile" [(ngModel)]="newFaculty.mobile">
+                <input type="number" class="form-control" id="fmobile" placeholder="Enter Mobile" name="modal_mobile" [(ngModel)]="newFaculty.mobile" (change)="disableBtn()">
               </div>
               <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Email</span>
                 </div>
-                <input type="text" class="form-control" id="email" placeholder="Enter Email id" name="modal_email" [(ngModel)]="newFaculty.email">
+                <input type="text" class="form-control" id="femail" placeholder="Enter Email id" name="modal_email" [(ngModel)]="newFaculty.email" (change)="disableBtn()">
               </div>
               <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Class</span>
                 </div>
-                <input type="text" class="form-control" id="class" placeholder="e.g. IV, V" name="modal_class" [(ngModel)]="newFaculty.class">
+                <input type="text" class="form-control" id="fclass" placeholder="e.g. IV, V" name="modal_class" [(ngModel)]="newFaculty.class" (change)="disableBtn()">
               </div>
               <div class="form-group input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Subject</span>
+                    <span class="input-group-text">Subject*</span>
                 </div>
-                <input type="text" class="form-control" id="subject" placeholder="e.g. Science, Maths" name="modal_subject" [(ngModel)]="newFaculty.subjects">
+                <input type="text" class="form-control" id="fsubject" placeholder="e.g. Science, Maths" name="modal_subject" [(ngModel)]="newFaculty.subjects" (change)="disableBtn()">
               </div>
             </form>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
-      <button type="submit" class="btn btn-outline-success" (click)="onSave(undefined)">Save</button>
+      <button type="submit" class="btn btn-outline-success" [disabled]="facultySubmitbtnDisabled" (click)="onSave(undefined)">Save</button>
     </div>
 
   </div>
@@ -115,7 +115,7 @@
                 </div>
                 <label class="form-control" id="facultyName">{{newFaculty.name}}</label>
               </div>
-              <div class="form-group input-group">
+              <div *ngIf="newFaculty.experience" class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Experience</span>
                 </div>
@@ -167,7 +167,6 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
-      <button type="submit" class="btn btn-outline-success" (click)="onSave(undefined)">Save</button>
     </div>
 
   </div>

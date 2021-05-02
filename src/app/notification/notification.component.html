@@ -19,7 +19,7 @@
       </div>
       <div class="modal-body">
           <div class="container">
-            <p>Are you sure you want to delete notification ?</p>
+            <p>Are you sure you want to delete notification?</p>
             </div>
       </div>
       <div class="modal-footer">
@@ -42,9 +42,9 @@
                 <form class="form-horizontal">
                   <div class="form-group input-group">
                     <div class="input-group-prepend">
-                      <span class="input-group-text">Message</span>
+                      <span class="input-group-text">Message*</span>
                     </div>
-                    <input type="text" class="form-control" id="email" placeholder="Enter Message" name="modal_not_message" [(ngModel)]="newNotification.notification">
+                    <input type="text" class="form-control" id="nmessage" placeholder="Enter Message" name="modal_not_message" [(ngModel)]="newNotification.notification" (change)="disableSubmitBtn()">
                   </div>
                   <!-- <div class="form-group">
                     <label class="control-label col-sm-2" for="description">Description:</label>
@@ -56,7 +56,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
-          <button type="submit" (click)="addNotification(undefined)" class="btn btn-outline-success">Submit</button>
+          <button type="submit" [disabled]="submitBtnDisabled" (click)="addNotification(undefined)" class="btn btn-outline-success">Submit</button>
         </div>
       </div>
   

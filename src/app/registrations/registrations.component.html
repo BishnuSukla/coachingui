@@ -27,7 +27,7 @@
             <i *ngIf="userLoggedIn" class="fa fa-pencil editPencil_small" data-toggle="modal" data-target="#editStudent" (click)="setFlagAndData('Update');setStudentToBeUpdated(studentObj.registrationId)" aria-hidden="true"></i>&nbsp;
             <i *ngIf="userLoggedIn" data-toggle="modal" data-target="#confirmModal" (click)="setFlagAndData('Delete');setStudentToBeUpdated(studentObj.registrationId)" class="fa fa-times removeIcon_small" aria-hidden="true"></i>
           </span></h2>
-          <div><b>Course:</b> {{studentObj.subject}}</div>
+          <div><b>Course/Subject:</b> {{studentObj.subject}}</div>
           <div><b>Class:</b> {{studentObj.class}}</div>
           <div><b>Tution Type:</b> {{studentObj.tuitionType}}</div>
           <div><b>Registered On:</b> {{studentObj.createdAt| date:'fullDate'}}</div>
@@ -52,41 +52,42 @@
             <form class="form-horizontal">
               <div class="form-group input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Name </span>
+                    <span class="input-group-text">Name* </span>
                 </div>
-                <input type="text" class="form-control" id="courseName" placeholder="Enter Course Name" name="modal_courseName" [(ngModel)]="selectedStudent.name">
+                <input type="text" class="form-control" id="regStdName" placeholder="Enter Student Name" name="modal_courseName" [(ngModel)]="selectedStudent.name" (change)="disableBtn()">
               </div>
               <div class="form-group input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Email Id </span>
+                    <span class="input-group-text">Email</span>
                 </div>
-                <input type="email" class="form-control" placeholder="Enter Email address"name="modal_emailId" [(ngModel)]="selectedStudent.emailId">
+                <input type="email" class="form-control" id="regStdEmail" placeholder="Enter Email Id" name="modal_emailId" [(ngModel)]="selectedStudent.emailId" (change)="disableBtn()">
               </div>
               <div class="form-group input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" for="category">Mobile No </span>
+                    <span class="input-group-text" for="category">Mobile*</span>
                 </div>
-                <input type="text" class="form-control" id="category" name="modal_catagory" [(ngModel)]="selectedStudent.mobileNo">
+                <input type="text" class="form-control" id="regStdMobile" name="modal_catagory" [(ngModel)]="selectedStudent.mobileNo" (change)="disableBtn()">
               </div>
               <div class="form-group input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Address </span>
+                    <span class="input-group-text">Address*</span>
                 </div>
-                 <textarea type="textarea" class="form-control" id="address"placeholder="Enter Address" name="modal_desc" [(ngModel)]="selectedStudent.address"></textarea>
+                 <textarea type="textarea" class="form-control" id="regStdAddress" placeholder="Enter Address" name="modal_desc" [(ngModel)]="selectedStudent.address" (change)="disableBtn()"></textarea>
               </div>
                <div class="form-group input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Class </span>
+                    <span class="input-group-text">Class* </span>
                 </div>
-                <input type="text" class="form-control" id="class" name="modal_catagory" [(ngModel)]="selectedStudent.class">
+                <input type="text" class="form-control" id="regStdClass" placeholder="Enter Class" name="modal_catagory" [(ngModel)]="selectedStudent.class" (change)="disableBtn()">
               </div>
               <div class="form-group input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">Tuition Type</span>
               </div>
               <select name="modal_tuitionType" class="form-control" [(ngModel)]="selectedStudent.tuitionType">
-                <option value="" disabled selected hidden>Select</option>
-                <option selected="">Home Tuition</option>
+                <option value="" disabled selected hidden>Select Tution Type</option>
+                <option selected="">Any</option>
+                <option>Home Tuition</option>
                 <option>Group Tuition</option>
               </select>
             </div>
@@ -94,7 +95,7 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
-      <button type="submit" class="btn btn-outline-success" (click)="onSave(undefined)">Save</button>
+      <button type="submit" class="btn btn-outline-success" [disabled]="registerSubmitbtnDisabled" (click)="onSave(undefined)">Save</button>
     </div>
 
   </div>

@@ -37,7 +37,7 @@
       </div>
       <div class="modal-body">
           <div class="container">
-            <p>Are you sure you want to delete course ?</p>
+            <p>Are you sure you want to delete course?</p>
             </div>
       </div>
       <div class="modal-footer">
@@ -59,20 +59,20 @@
             <form class="form-horizontal">
               <div class="form-group input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Name </span>
+                    <span class="input-group-text">Name* </span>
                 </div>
-                <input type="text" class="form-control" id="courseName" placeholder="Enter Course Name" name="modal_courseName" [(ngModel)]="newCourse.name">
+                <input type="text" class="form-control" id="courseName" placeholder="Enter Course Name" name="modal_courseName" [(ngModel)]="newCourse.name" (change)="disableBtn()">
               </div>
               <div class="form-group input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" for="description">Description </span>
+                    <span class="input-group-text" for="description">Description* </span>
                 </div>
-                <textarea type="textarea" class="form-control" id="description" placeholder="Enter Description" name="modal_desc" [(ngModel)]="newCourse.topicCovered"></textarea>
+                <textarea type="textarea" class="form-control" id="cdescription" placeholder="Enter Description" name="modal_desc" [(ngModel)]="newCourse.topicCovered" (change)="disableBtn()"></textarea>
               </div>
               <div class="form-group input-group" *ngFor="let tution of newCourse.typeOfTution">
                 <div class="form-group">
-                  <label class="" for="{{tution.type}}">{{tution.type}} Tuition</label>
-                  <input type="checkbox" id="{{tution.type}}" [(ngModel)]="tution.available" [ngModelOptions]="{standalone: true}">
+                  <label class="" for="{{tution.type}}">{{tution.type}} Tuition</label>&nbsp;
+                  <input type="checkbox" id="c{{tution.type}}" [(ngModel)]="tution.available" (change)="disableBtn()" [ngModelOptions]="{standalone: true}">
                 </div>
                 <!-- <div class="form-group input-group">
                   <div class="input-group-prepend">
@@ -80,11 +80,11 @@
                   </div>
                   <input type="checkbox" id="{{tution.type}}" [(ngModel)]="tution.available" [ngModelOptions]="{standalone: true}">
                 </div> -->
-                <div class="form-group input-group">
+                <div *ngIf="tution.available" class="form-group input-group">
                   <div class="input-group-prepend">
-                      <span class="input-group-text">Fees</span>
+                      <span class="input-group-text">Fees *</span>
                   </div>
-                  <input type="number" class="form-control" id="fees" placeholder="Enter Fees" name="modal_fees" [(ngModel)]="tution.fee" [ngModelOptions]="{standalone: true}">
+                  <input type="number" class="form-control" id="c{{tution.type}}fees" placeholder="Enter Fees" name="modal_fees" [(ngModel)]="tution.fee" [ngModelOptions]="{standalone: true}" (change)="disableBtn()">
                 </div>
               </div>
               <div class="form-group input-group">
@@ -103,7 +103,7 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
-      <button type="submit" class="btn btn-outline-success" (click)="onSave(undefined)">Save</button>
+      <button type="submit" class="btn btn-outline-success" [disabled]="courseSubmitbtnDisabled" (click)="onSave(undefined)">Save</button>
     </div>
 
   </div>
@@ -113,7 +113,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-          <h4 class="modal-title">Course Details</h4>
+          <h4 class="modal-title">{{operation}}</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body container">
@@ -153,41 +153,42 @@
              <div *ngIf = "operation == 'Enter Student Details'">
               <div class="form-group input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Name </span>
+                    <span class="input-group-text">Name* </span>
                  </div>
-                    <input name="modal_name"class="form-control" id="studentName" placeholder="Enter Full name" type="text" [(ngModel)]="newStudentInfo.name">
+                    <input name="modal_name"class="form-control" id="rstudentName" placeholder="Enter Full Name" type="text" [(ngModel)]="newStudentInfo.name" (change)="disableBtn()">
                 </div>
                 <div class="form-group input-group">
                   <div class="input-group-prepend">
-                    <span class="input-group-text">Email Id </span>
+                    <span class="input-group-text">Email</span>
                  </div>
-                    <input name="modal_emailId" class="form-control" placeholder="Enter Email address" type="email" [(ngModel)]="newStudentInfo.emailId">
+                    <input name="modal_emailId" class="form-control" id="remail" placeholder="Enter Email Id" type="email" [(ngModel)]="newStudentInfo.emailId" (change)="disableBtn()">
                 </div>
                 <div class="form-group input-group">
                   <div class="input-group-prepend">
-                    <span class="input-group-text">Mobile No </span>
+                    <span class="input-group-text">Mobile* </span>
                 </div>
-                <input name="modal_mobileNo" class="form-control" placeholder="Enter Mobile No" type="number" [(ngModel)]="newStudentInfo.mobileNo">
+                <input name="modal_mobileNo" class="form-control" id="rphone" placeholder="Enter Mobile Number" type="number" [(ngModel)]="newStudentInfo.mobileNo" (change)="disableBtn()">
                 </div>
                 <div class="form-group input-group">
                   <div class="input-group-prepend">
-                      <span class="input-group-text">Address </span>
+                      <span class="input-group-text">Address* </span>
                   </div>
-                   <textarea type="textarea" class="form-control" id="address" placeholder="Enter Address" name="modal_desc" [(ngModel)]="newStudentInfo.address"></textarea>
+                   <textarea type="textarea" class="form-control" id="raddress" placeholder="Enter Address" name="modal_desc" [(ngModel)]="newStudentInfo.address" (change)="disableBtn()"></textarea>
                 </div>
                 <div class="form-group input-group">
                   <div class="input-group-prepend">
-                    <span class="input-group-text">Class </span>
+                    <span class="input-group-text">Class* </span>
                 </div>
-                <input name="modal_class" class="form-control" placeholder="Enter class" [(ngModel)]="newStudentInfo.class">
+                <input name="modal_class" class="form-control" id="rclass" placeholder="Enter Class" [(ngModel)]="newStudentInfo.class" (change)="disableBtn()">
               </div>
               <div class="form-group input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">Tuition Type</span>
               </div>
               <select name="modal_tuitionType" class="form-control" [(ngModel)]="newStudentInfo.tuitionType">
-                <option value="" disabled selected hidden>Select</option>
-                <option selected="">Home Tuition</option>
+                <option value="" disabled selected hidden>Select Type</option>
+                <option selected="">Any</option>
+                <option>Home Tuition</option>
                 <option>Group Tuition</option>
               </select>
             </div>
@@ -196,7 +197,7 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-default" data-dismiss="modal">Close</button>
-      <button *ngIf = "operation == 'Enter Student Details'" type="submit" class="btn btn-outline-success" (click) = "onRegister()">Submit</button>
+      <button *ngIf = "operation == 'Enter Student Details'" type="submit" class="btn btn-outline-success" [disabled]="registerSubmitbtnDisabled" (click) = "onRegister()">Submit</button>
       <button *ngIf = "operation == 'View details'" type="submit" class="btn btn-outline-success" (click) = "setFlagAndData('Enter Student Details');onRegisterClick(newCourse.name)">Register</button>
     </div>
   </div>

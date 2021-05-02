@@ -16,6 +16,8 @@ export class NotificationComponent implements OnInit {
   newNotification:any;
   flag:string;
   removeText='';
+  validate:any;
+  submitBtnDisabled:boolean;
   constructor(private _apiService:ApiService,private _subjectService:SubjectService,private toastr: ToastrService) { 
     this.newNotification = {
       notification:''
@@ -34,6 +36,11 @@ export class NotificationComponent implements OnInit {
     },response=>{
       console.log(response);
     })
+
+    this.validate = {
+      notification:''
+    }
+    this.submitBtnDisabled = true;
   }
 
  
@@ -51,6 +58,7 @@ export class NotificationComponent implements OnInit {
   }
   setNotificationToBeUpdated(notificationId){
     this.newNotification = _.cloneDeep(_.find(this.notifications,{notificationId:notificationId}));
+    this.submitBtnDisabled = true;
   }
 
   addNotification(data){
@@ -102,6 +110,19 @@ export class NotificationComponent implements OnInit {
     $('#newNotification').modal('hide');
     $('#confirmModalForNotification').modal('hide');
     
+  }
+  disableSubmitBtn(){
+    this.submitBtnDisabled = this.validateNotificationData();
+  }
+  validateNotificationData(){
+    let flag = false;
+    if(this.newNotification.notification.trim() == this.validate.notification){
+      $('#nmessage').addClass('is-invalid');
+      flag = true;
+    }else{
+      $('#nmessage').removeClass('is-invalid');
+    }
+    return flag;
   }
 
 

@@ -19,6 +19,10 @@ export class CourseComponent implements OnInit {
   filterArgs:string;
   isViewMode: any = false;
   newStudentInfo: any;
+  validate:any;
+  courseSubmitbtnDisabled:boolean;
+  registerSubmitbtnDisabled:boolean;
+  validateRegistration:any;
   constructor(private _apiService:ApiService, private _subjectService:SubjectService, private toastr: ToastrService) {
     this.filterArgs = '';
     this.newCourse ={
@@ -27,12 +31,12 @@ export class CourseComponent implements OnInit {
     typeOfTution:[
       {
         type:'Home',
-        fee:0,
+        fee:null,
         available:false
       },
       {
         type:'Group',
-        fee:0,
+        fee:null,
         available:false
       }            
     ],
@@ -52,6 +56,8 @@ export class CourseComponent implements OnInit {
      tuitionType:"",
      class:""
    }
+   this.courseSubmitbtnDisabled = true;
+   this.registerSubmitbtnDisabled = true;
   }
 
   ngOnInit(): void {
@@ -66,13 +72,30 @@ export class CourseComponent implements OnInit {
     },response=>{
       console.log(response);
     })
+
+    this.validate= {
+      'name':'',
+      'topicCovered':'',
+      'fee':null
+    }
+    this.validateRegistration = {
+      name:"",
+      emailId:"",
+      mobileNo:null,
+      address:"",
+      subject:"",
+      tuitionType:"",
+      class:""
+    }
   }
 
   setCourseToBeUpdated(courseId){
     this.newCourse= _.cloneDeep(_.find(this.courses,{courseId:courseId}));
+    this.courseSubmitbtnDisabled = true;
   }
   onRegisterClick(name){
     this.newStudentInfo.subject = name;
+    this.registerSubmitbtnDisabled = true;
   }
 
   setFlagAndData(val){
@@ -87,12 +110,12 @@ export class CourseComponent implements OnInit {
       typeOfTution:[
         {
           type:'Home',
-          fee:0,
+          fee:null,
           available:false
         },
         {
           type:'Group',
-          fee:0,
+          fee:null,
           available:false
         }            
       ],
@@ -109,8 +132,16 @@ export class CourseComponent implements OnInit {
       mobileNo:"",
       address:"",
       subject:"",
-      tuitionType:"",
+      tuitionType:"Any",
       class:""
+    }
+  }
+
+  disableBtn(){
+    if(this.operation == 'Add' || this.operation == 'Update'){
+      this.courseSubmitbtnDisabled = this.validateCourseData();
+    }else if("Enter Student Details"){
+      this.registerSubmitbtnDisabled = this.validateRegistrationData();
     }
   }
 
@@ -181,6 +212,69 @@ export class CourseComponent implements OnInit {
         this._subjectService.clearToken(response);
     })
     $('#viewDetails').modal('hide');
+  }
+
+  validateCourseData(){
+    let flag = false;
+    if(this.newCourse.name.trim() == this.validate.name){
+      $('#courseName').addClass('is-invalid');
+      flag = true;
+    }else{
+      $('#courseName').removeClass('is-invalid');
+    }
+    if(this.newCourse.topicCovered.trim()== this.validate.topicCovered){
+      $('#cdescription').addClass('is-invalid');
+      flag = true;
+    }else{
+      $('#cdescription').removeClass('is-invalid');
+    }
+    for(var i=0;i<this.newCourse.typeOfTution.length;i++){
+      let tutionType = this.newCourse.typeOfTution[i];
+      if(tutionType.available && tutionType.fee == this.validate.fee){
+        $('#c'+tutionType.type+'fees').addClass('is-invalid');
+        flag = true;
+      }else{
+        $('#c'+tutionType.type+'fees').removeClass('is-invalid');
+      }
+    }
+    return flag;
+  }
+
+  validateRegistrationData(){
+    let flag = false;
+    if(this.newStudentInfo.name.trim() == this.validateRegistration.name){
+      $('#rstudentName').addClass('is-invalid');
+      flag = true;
+    }else{
+      $('#rstudentName').removeClass('is-invalid');
+    }
+    if(this.newStudentInfo.emailId){
+      if(!this._apiService.isValidEmail(this.newStudentInfo.emailId)){
+        $('#remail').addClass('is-invalid');
+        flag = true;
+      }else{
+        $('#remail').removeClass('is-invalid');
+      }
+    }
+    if(!this._apiService.isValidPhone(String(this.newStudentInfo.mobileNo))){
+      $('#rphone').addClass('is-invalid');
+      flag = true;
+    }else{
+      $('#rphone').removeClass('is-invalid');
+    }
+    if(this.newStudentInfo.address.trim() == this.validateRegistration.address){
+      $('#raddress').addClass('is-invalid');
+      flag = true;
+    }else{
+      $('#raddress').removeClass('is-invalid');
+    }
+    if(this.newStudentInfo.class.trim() == this.validateRegistration.class){
+      $('#rclass').addClass('is-invalid');
+      flag = true;
+    }else{
+      $('#rclass').removeClass('is-invalid');
+    }
+    return flag;
   }
 
 }
